@@ -2,7 +2,9 @@ package com.study.realworld.user.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.study.realworld.article.domain.Article;
@@ -195,6 +197,8 @@ class ArticleFavoritesTest {
         assertThat(result)
             .isEqualTo(ArticleFavorites.of(articleFavoriteSet))
             .hasSameHashCodeAs(ArticleFavorites.of(articleFavoriteSet));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }
