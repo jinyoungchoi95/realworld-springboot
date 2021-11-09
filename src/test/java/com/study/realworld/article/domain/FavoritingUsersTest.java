@@ -1,6 +1,8 @@
 package com.study.realworld.article.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.articlefavorite.domain.ArticleFavorite;
 import com.study.realworld.tag.domain.Tag;
@@ -83,6 +85,8 @@ class FavoritingUsersTest {
         assertThat(result)
             .isEqualTo(FavoritingUsers.of(articleFavoriteSet))
             .hasSameHashCodeAs(FavoritingUsers.of(articleFavoriteSet));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }
