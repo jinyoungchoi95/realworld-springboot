@@ -63,13 +63,13 @@ public class ArticleServiceIntegrationTest {
 
     @BeforeEach
     void beforeEachTest() {
-        user = User.Builder()
+        user = User.builder()
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .build();
 
-        favoritingUser = User.Builder()
+        favoritingUser = User.builder()
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("jakejake"))
@@ -150,7 +150,7 @@ public class ArticleServiceIntegrationTest {
 
         for (Article inputArticle : articles) {
             Article article = articleRepository.save(inputArticle);
-            articleFavoriteRepository.save(ArticleFavorite.builder().user(favoritingUser).article(article).build());
+            articleFavoriteRepository.save(ArticleFavorite.from(favoritingUser, article));
         }
         entityManager.flush();
         entityManager.clear();

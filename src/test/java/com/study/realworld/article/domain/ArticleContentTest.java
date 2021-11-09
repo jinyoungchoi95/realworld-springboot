@@ -2,6 +2,8 @@ package com.study.realworld.article.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.tag.domain.Tag;
 import java.util.Arrays;
@@ -110,6 +112,14 @@ class ArticleContentTest {
     @DisplayName("equals hashCode 테스트")
     void articleContentEqualsHashCodeTest() {
 
+        // given
+        ArticleContent expected = ArticleContent.builder()
+            .slugTitle(slugTitle)
+            .description(description)
+            .body(body)
+            .tags(tags)
+            .build();
+
         // when
         ArticleContent result = ArticleContent.builder()
             .slugTitle(slugTitle)
@@ -120,18 +130,10 @@ class ArticleContentTest {
 
         // then
         assertThat(result)
-            .isEqualTo(ArticleContent.builder()
-                .slugTitle(slugTitle)
-                .description(description)
-                .body(body)
-                .tags(tags)
-                .build())
-            .hasSameHashCodeAs(ArticleContent.builder()
-                .slugTitle(slugTitle)
-                .description(description)
-                .body(body)
-                .tags(tags)
-                .build());
+            .isEqualTo(expected)
+            .hasSameHashCodeAs(expected);
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

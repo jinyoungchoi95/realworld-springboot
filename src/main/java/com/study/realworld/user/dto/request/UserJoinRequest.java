@@ -33,7 +33,7 @@ public class UserJoinRequest {
     }
 
     public User toUser() {
-        return User.Builder()
+        return User.builder()
             .profile(Username.of(username), Bio.of(bio), Image.of(image))
             .email(Email.of(email))
             .password(Password.of(password))

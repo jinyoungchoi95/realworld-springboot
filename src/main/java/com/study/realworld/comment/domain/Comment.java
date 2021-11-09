@@ -62,10 +62,6 @@ public class Comment extends BaseTimeEntity {
         return author;
     }
 
-    public Article article() {
-        return article;
-    }
-
     public void deleteCommentByAuthor(User author) {
         checkCommentAuthor(author);
 

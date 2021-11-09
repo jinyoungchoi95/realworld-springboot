@@ -26,12 +26,6 @@ public class ProfileResponse {
         );
     }
 
-    public static ProfileResponse fromProfileAndFollowing(Profile profile, boolean following) {
-        return new ProfileResponse(
-            ProfileResponseNested.fromProfileAndFollowing(profile, following)
-        );
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

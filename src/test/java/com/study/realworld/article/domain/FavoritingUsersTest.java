@@ -1,6 +1,8 @@
 package com.study.realworld.article.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.articlefavorite.domain.ArticleFavorite;
 import com.study.realworld.tag.domain.Tag;
@@ -24,7 +26,7 @@ class FavoritingUsersTest {
 
     @BeforeEach
     void beforeEach() {
-        user = User.Builder()
+        user = User.builder()
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
@@ -49,10 +51,7 @@ class FavoritingUsersTest {
     void sizeTest() {
 
         // given
-        ArticleFavorite articleFavorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article)
-            .build();
+        ArticleFavorite articleFavorite = ArticleFavorite.from(user, article);
         Set<ArticleFavorite> articleFavoriteSet = new HashSet<>();
         articleFavoriteSet.add(articleFavorite);
         FavoritingUsers favoritingUsers = FavoritingUsers.of(articleFavoriteSet);
@@ -69,10 +68,7 @@ class FavoritingUsersTest {
     void favoritingUsersEqualsHashCodeTest() {
 
         // given
-        ArticleFavorite articleFavorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article)
-            .build();
+        ArticleFavorite articleFavorite = ArticleFavorite.from(user, article);
         Set<ArticleFavorite> articleFavoriteSet = new HashSet<>();
         articleFavoriteSet.add(articleFavorite);
 
@@ -83,6 +79,8 @@ class FavoritingUsersTest {
         assertThat(result)
             .isEqualTo(FavoritingUsers.of(articleFavoriteSet))
             .hasSameHashCodeAs(FavoritingUsers.of(articleFavoriteSet));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

@@ -39,26 +39,6 @@ public class UserResponse {
         this.token = token;
     }
 
-    public Username getUsername() {
-        return username;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
-    public Bio getBio() {
-        return bio;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
     public static UserResponse fromUserAndToken(User user, String accessToken) {
         return new UserResponse(
             user.username(),

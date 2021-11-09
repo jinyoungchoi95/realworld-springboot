@@ -3,7 +3,7 @@ package com.study.realworld.comment.controller;
 import com.study.realworld.article.domain.Slug;
 import com.study.realworld.comment.dto.request.CommentCreateRequest;
 import com.study.realworld.comment.dto.response.CommentResponse;
-import com.study.realworld.comment.dto.response.CommentsResponse;
+import com.study.realworld.comment.dto.response.CommentResponses;
 import com.study.realworld.comment.service.CommentService;
 import com.study.realworld.global.security.CurrentUserId;
 import java.util.Optional;
@@ -27,11 +27,11 @@ public class CommentController {
     }
 
     @GetMapping("/articles/{slug}/comments")
-    public ResponseEntity<CommentsResponse> getCommentByArticleSlug(@PathVariable String slug, @CurrentUserId Long userId) {
-        CommentsResponse commentsResponse = Optional.ofNullable(userId)
+    public ResponseEntity<CommentResponses> getCommentByArticleSlug(@PathVariable String slug, @CurrentUserId Long userId) {
+        CommentResponses commentResponses = Optional.ofNullable(userId)
             .map(id -> commentService.findCommentsByArticleSlug(id, Slug.of(slug)))
             .orElse(commentService.findCommentsByArticleSlug(Slug.of(slug)));
-        return ResponseEntity.ok().body(commentsResponse);
+        return ResponseEntity.ok().body(commentResponses);
     }
 
     @PostMapping("/articles/{slug}/comments")

@@ -12,7 +12,6 @@ import com.study.realworld.article.domain.SlugTitle;
 import com.study.realworld.article.domain.Title;
 import com.study.realworld.comment.domain.Comment;
 import com.study.realworld.comment.domain.CommentBody;
-import com.study.realworld.comment.dto.response.CommentResponse.CommentResponseNested;
 import com.study.realworld.tag.domain.Tag;
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
@@ -24,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CommentResponseTest {
+class CommentResponsesTest {
 
     private User user;
     private Article article;
@@ -54,42 +53,19 @@ class CommentResponseTest {
     }
 
     @Test
-    void commentResponseTest() {
-        CommentResponse commentResponse = new CommentResponse();
+    void commentResponsesTest() {
+        CommentResponses commentResponses = new CommentResponses();
     }
 
     @Test
     @DisplayName("equals hashCode 테스트")
-    void commentResponseEqualsHashCodeTest() {
+    void commentResponsesEqualsHashCodeTest() {
 
         // given
-        CommentResponse expected = CommentResponse.fromComment(comment);
+        CommentResponses expected = CommentResponses.fromComments(Arrays.asList(comment));
 
         // when
-        CommentResponse result = CommentResponse.fromComment(comment);
-
-        // then
-        assertThat(result)
-            .isEqualTo(expected)
-            .hasSameHashCodeAs(expected);
-        assertEquals(result, result);
-        assertNotEquals(result, null);
-    }
-
-    @Test
-    void commentResponseNestedTest() {
-        CommentResponseNested commentResponseNested = new CommentResponseNested();
-    }
-
-    @Test
-    @DisplayName("equals hashCode 테스트")
-    void commentResponseNestedEqualsHashCodeTest() {
-
-        // given
-        CommentResponseNested expected = CommentResponseNested.fromComment(comment);
-
-        // when
-        CommentResponseNested result = CommentResponseNested.fromComment(comment);
+        CommentResponses result = CommentResponses.fromComments(Arrays.asList(comment));
 
         // then
         assertThat(result)

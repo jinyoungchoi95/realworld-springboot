@@ -2,6 +2,8 @@ package com.study.realworld.user.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.global.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
@@ -83,13 +85,17 @@ class UsernameTest {
     void usernameEqualsHashCodeTest() {
 
         // given
-        Username username = Username.of("username");
-        Username copyUsername = Username.of("username");
+        String username = "username";
 
-        // when & then
-        assertThat(username)
-            .isEqualTo(copyUsername)
-            .hasSameHashCodeAs(copyUsername);
+        // when
+        Username result = Username.of(username);
+
+        // then
+        assertThat(result)
+            .isEqualTo(Username.of(username))
+            .hasSameHashCodeAs(Username.of(username));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

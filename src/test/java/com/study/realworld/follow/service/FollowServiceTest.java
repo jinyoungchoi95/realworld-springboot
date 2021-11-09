@@ -40,14 +40,14 @@ public class FollowServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        user = User.Builder()
+        user = User.builder()
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .follows(Follows.of(new HashSet<>()))
             .build();
 
-        followee = User.Builder()
+        followee = User.builder()
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("jakejake"))
@@ -100,7 +100,7 @@ public class FollowServiceTest {
                 .followee(followee)
                 .build();
             followSet.add(follow);
-            user = User.Builder()
+            user = User.builder()
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
                 .password(Password.of("jakejake"))
@@ -123,7 +123,7 @@ public class FollowServiceTest {
             when(userService.findById(userId)).thenReturn(user);
             when(userService.findByUsername(username)).thenReturn(followee);
 
-            FollowResponse expected = FollowResponse.fromProfileAndFollowing(followee.profile(), true);
+            FollowResponse expected = FollowResponse.fromUserAndFollowing(followee, true);
 
             // when
             FollowResponse result = followService.followUser(userId, username);
@@ -193,7 +193,7 @@ public class FollowServiceTest {
                 .followee(followee)
                 .build();
             followSet.add(follow);
-            user = User.Builder()
+            user = User.builder()
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
                 .password(Password.of("jakejake"))
@@ -202,7 +202,7 @@ public class FollowServiceTest {
             when(userService.findById(userId)).thenReturn(user);
             when(userService.findByUsername(username)).thenReturn(followee);
 
-            FollowResponse expected = FollowResponse.fromProfileAndFollowing(followee.profile(), false);
+            FollowResponse expected = FollowResponse.fromUserAndFollowing(followee, false);
 
             // when
             FollowResponse result = followService.unfollowUser(userId, username);

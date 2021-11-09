@@ -24,7 +24,6 @@ import com.study.realworld.testutil.PrincipalArgumentResolver;
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
 import com.study.realworld.user.domain.Password;
-import com.study.realworld.user.domain.Profile;
 import com.study.realworld.user.domain.User;
 import com.study.realworld.user.domain.Username;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,14 +65,14 @@ class FollowControllerTest {
             .alwaysExpect(status().isOk())
             .build();
 
-        user = User.Builder()
+        user = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .build();
 
-        followee = User.Builder()
+        followee = User.builder()
             .id(2L)
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
@@ -86,8 +85,8 @@ class FollowControllerTest {
 
         // setup
         String username = followee.username().value();
-        Profile expected = followee.profile();
-        FollowResponse response = FollowResponse.fromProfileAndFollowing(expected, true);
+        User expected = followee;
+        FollowResponse response = FollowResponse.fromUserAndFollowing(expected, true);
         when(followService.followUser(1L, followee.username())).thenReturn(response);
 
         // given
@@ -128,8 +127,8 @@ class FollowControllerTest {
 
         // setup
         String username = followee.username().value();
-        Profile expected = followee.profile();
-        FollowResponse response = FollowResponse.fromProfileAndFollowing(expected, false);
+        User expected = followee;
+        FollowResponse response = FollowResponse.fromUserAndFollowing(expected, false);
         when(followService.unfollowUser(1L, followee.username())).thenReturn(response);
 
         // given

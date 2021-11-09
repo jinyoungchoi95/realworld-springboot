@@ -45,7 +45,7 @@ class UserServiceTest {
 
         // setup & given
         Username username = Username.of("username");
-        User user = User.Builder()
+        User user = User.builder()
             .profile(username, null, null)
             .build();
         when(userRepository.findByProfileUsername(username))
@@ -64,7 +64,7 @@ class UserServiceTest {
         // setup & given
         Username username = Username.of("username");
         Email email = Email.of("email@email.com");
-        User user = User.Builder()
+        User user = User.builder()
             .profile(username, null, null)
             .email(email)
             .build();
@@ -91,13 +91,13 @@ class UserServiceTest {
         when(userRepository.findByEmail(email)).thenReturn(empty());
         when(passwordEncoder.encode(password.password())).thenReturn("encoded_password");
 
-        User input = User.Builder()
+        User input = User.builder()
             .profile(username, bio, image)
             .email(email)
             .password(password)
             .build();
         when(userRepository.save(input)).thenReturn(
-            User.Builder()
+            User.builder()
                 .id(1L)
                 .profile(username, bio, image)
                 .email(input.email())
@@ -139,7 +139,7 @@ class UserServiceTest {
         // setup & given
         Email email = Email.of("test@test.com");
         Password password = Password.of("password");
-        User user = User.Builder().password(Password.of("encoded_password")).build();
+        User user = User.builder().password(Password.of("encoded_password")).build();
         when(userRepository.findByEmail(email)).thenReturn(ofNullable(user));
         when(passwordEncoder.matches("password", "encoded_password")).thenReturn(false);
 
@@ -155,7 +155,7 @@ class UserServiceTest {
         // setup & given
         Email email = Email.of("test@test.com");
         Password password = Password.of("password");
-        User input = User.Builder().email(email).password(Password.of("encoded_password")).build();
+        User input = User.builder().email(email).password(Password.of("encoded_password")).build();
         when(userRepository.findByEmail(email)).thenReturn(ofNullable(input));
         when(passwordEncoder.matches("password", "encoded_password")).thenReturn(true);
 
@@ -173,7 +173,7 @@ class UserServiceTest {
     void findByIdSuccessTest() {
 
         // setup & given
-        User user = User.Builder().email(Email.of("test@test.com")).build();
+        User user = User.builder().email(Email.of("test@test.com")).build();
         Long userId = 2L;
         when(userRepository.findById(userId)).thenReturn(ofNullable(user));
 
@@ -217,7 +217,7 @@ class UserServiceTest {
 
         // setup & given
         Username username = Username.of("uesrname");
-        User user = User.Builder().email(Email.of("test@test.com")).profile(username, null, null).build();
+        User user = User.builder().email(Email.of("test@test.com")).profile(username, null, null).build();
         when(userRepository.findByProfileUsername(username)).thenReturn(ofNullable(user));
 
         // when
@@ -272,12 +272,12 @@ class UserServiceTest {
 
         @BeforeEach
         void beforeEach() {
-            user = User.Builder()
+            user = User.builder()
                 .profile(Username.of("username"), Bio.of("bio"), Image.of("image"))
                 .email(Email.of("test@test.com"))
                 .password(Password.of("encoded_password"))
                 .build();
-            originUser = User.Builder()
+            originUser = User.builder()
                 .profile(Username.of("username"), Bio.of("bio"), Image.of("image"))
                 .email(Email.of("test@test.com"))
                 .password(Password.of("encoded_password"))
@@ -314,7 +314,7 @@ class UserServiceTest {
                 UserUpdateModel userUpdateModel = new UserUpdateModel(username, null,
                     null, null, null);
                 when(userRepository.findByProfileUsername(username))
-                    .thenReturn(Optional.ofNullable(User.Builder().build()));
+                    .thenReturn(Optional.ofNullable(User.builder().build()));
 
                 // when & then
                 assertThatExceptionOfType(BusinessException.class)
@@ -377,7 +377,7 @@ class UserServiceTest {
                 UserUpdateModel userUpdateModel = new UserUpdateModel(null, email,
                     null, null, null);
                 when(userRepository.findByEmail(email))
-                    .thenReturn(Optional.ofNullable(User.Builder().build()));
+                    .thenReturn(Optional.ofNullable(User.builder().build()));
 
                 // when & then
                 assertThatExceptionOfType(BusinessException.class)

@@ -2,6 +2,8 @@ package com.study.realworld.user.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.global.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
@@ -57,13 +59,17 @@ class EmailTest {
     void emailEqualsHashCodeTest() {
 
         // given
-        Email email = Email.of("test@test.com");
-        Email copyEmail = Email.of("test@test.com");
+        String email = "email@email.com";
 
-        // when & then
-        assertThat(email)
-            .isEqualTo(copyEmail)
-            .hasSameHashCodeAs(copyEmail);
+        // when
+        Email result = Email.of(email);
+
+        // then
+        assertThat(result)
+            .isEqualTo(Email.of(email))
+            .hasSameHashCodeAs(Email.of(email));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

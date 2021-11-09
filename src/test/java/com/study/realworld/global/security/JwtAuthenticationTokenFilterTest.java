@@ -111,7 +111,7 @@ class JwtAuthenticationTokenFilterTest {
 
         // sestup & given
         when(request.getHeader(AUTHORIZATION)).thenReturn("Token token");
-        User user = User.Builder().id(2L).build();
+        User user = User.builder().id(2L).build();
         when(jwtService.getUser("token")).thenReturn(Optional.ofNullable(user));
         filter.doFilterInternal(request, response, filterChain);
 

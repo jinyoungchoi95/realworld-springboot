@@ -2,6 +2,8 @@ package com.study.realworld.comment.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.article.domain.Article;
 import com.study.realworld.article.domain.ArticleContent;
@@ -33,7 +35,7 @@ public class CommentTest {
 
     @BeforeEach
     void beforeEach() {
-        author = User.Builder()
+        author = User.builder()
             .email(Email.of("email@email.com"))
             .password(Password.of("password"))
             .profile(Username.of("username"), Bio.of("bio"), Image.of("image"))
@@ -63,7 +65,7 @@ public class CommentTest {
 
             // given
             Comment comment = Comment.from(commentBody, author, article);
-            User user = User.Builder()
+            User user = User.builder()
                 .email(Email.of("email2@email2.com"))
                 .password(Password.of("password"))
                 .profile(Username.of("username2"), Bio.of("bio"), Image.of("image"))
@@ -105,6 +107,8 @@ public class CommentTest {
         assertThat(result)
             .isEqualTo(Comment.from(commentBody, author, article))
             .hasSameHashCodeAs(Comment.from(commentBody, author, article));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

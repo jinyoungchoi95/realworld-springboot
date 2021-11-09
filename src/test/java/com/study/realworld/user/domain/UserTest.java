@@ -3,7 +3,9 @@ package com.study.realworld.user.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -43,7 +45,7 @@ class UserTest {
 
     @BeforeEach
     void beforeEachTest() {
-        user = User.Builder()
+        user = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
@@ -52,7 +54,7 @@ class UserTest {
             .articleFavorites(new ArticleFavorites())
             .build();
 
-        followee = User.Builder()
+        followee = User.builder()
             .id(2L)
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
@@ -80,7 +82,7 @@ class UserTest {
     void userEncodePasswordTest() {
 
         // setup & given
-        User user = User.Builder().password(Password.of("password")).build();
+        User user = User.builder().password(Password.of("password")).build();
         when(passwordEncoder.encode(user.password().password()))
             .thenReturn("encoded_password");
 
@@ -99,7 +101,7 @@ class UserTest {
         when(passwordEncoder.matches("password", "encoded_password")).thenReturn(true);
 
         // given
-        User user = User.Builder().password(Password.of("encoded_password")).build();
+        User user = User.builder().password(Password.of("encoded_password")).build();
         Password password = Password.of("password");
 
         // when & then
@@ -114,7 +116,7 @@ class UserTest {
         when(passwordEncoder.matches("password", "encoded_password")).thenReturn(false);
 
         // given
-        User user = User.Builder().password(Password.of("encoded_password")).build();
+        User user = User.builder().password(Password.of("encoded_password")).build();
         Password password = Password.of("password");
 
         // when & then
@@ -138,7 +140,7 @@ class UserTest {
                 .followee(followee)
                 .build();
             followSet.add(follow);
-            user = User.Builder()
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
@@ -189,7 +191,7 @@ class UserTest {
                 .followee(followee)
                 .build();
             followSet.add(follow);
-            user = User.Builder()
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
@@ -215,11 +217,9 @@ class UserTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article).build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
-            user = User.Builder()
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
@@ -239,10 +239,8 @@ class UserTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article).build();
-            user = User.Builder()
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
@@ -250,10 +248,7 @@ class UserTest {
                 .articleFavorites(ArticleFavorites.of(favoriteSet))
                 .build();
 
-            ArticleFavorite expected = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite expected = ArticleFavorite.from(user, article);
 
             // when
             ArticleFavorite result = user.createFavoriteForFavoriting(article);
@@ -284,11 +279,9 @@ class UserTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article).build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
-            user = User.Builder()
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
@@ -296,10 +289,7 @@ class UserTest {
                 .articleFavorites(ArticleFavorites.of(favoriteSet))
                 .build();
 
-            ArticleFavorite expected = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite expected = ArticleFavorite.from(user, article);
 
             // when
             ArticleFavorite result = user.createFavoriteForUnfavoriting(article);
@@ -316,11 +306,9 @@ class UserTest {
 
         // given
         Set<ArticleFavorite> favoriteSet = new HashSet<>();
-        ArticleFavorite favorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article).build();
+        ArticleFavorite favorite = ArticleFavorite.from(user, article);
         favoriteSet.add(favorite);
-        user = User.Builder()
+        user = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
@@ -340,13 +328,18 @@ class UserTest {
     void userEqualsHashCodeTest() {
 
         // given
-        User user = User.Builder().email(Email.of("test@test.com")).build();
-        User copyUser = User.Builder().email(Email.of("test@test.com")).build();
+        Email email = Email.of("email@email.com");
+        User expected = User.builder().email(email).build();
+
+        // when
+        User result = User.builder().email(email).build();
 
         // when & then
-        assertThat(user)
-            .isEqualTo(copyUser)
-            .hasSameHashCodeAs(copyUser);
+        assertThat(result)
+            .isEqualTo(expected)
+            .hasSameHashCodeAs(expected);
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

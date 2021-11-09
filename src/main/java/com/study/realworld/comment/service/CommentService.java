@@ -7,7 +7,7 @@ import com.study.realworld.comment.domain.Comment;
 import com.study.realworld.comment.domain.CommentBody;
 import com.study.realworld.comment.domain.CommentRepository;
 import com.study.realworld.comment.dto.response.CommentResponse;
-import com.study.realworld.comment.dto.response.CommentsResponse;
+import com.study.realworld.comment.dto.response.CommentResponses;
 import com.study.realworld.global.exception.BusinessException;
 import com.study.realworld.global.exception.ErrorCode;
 import com.study.realworld.user.domain.User;
@@ -30,20 +30,20 @@ public class CommentService {
     }
 
     @Transactional(readOnly = true)
-    public CommentsResponse findCommentsByArticleSlug(Slug slug) {
+    public CommentResponses findCommentsByArticleSlug(Slug slug) {
         Article article = articleService.findBySlug(slug);
 
         List<Comment> comments = commentRepository.findAllByArticle(article);
-        return CommentsResponse.fromComments(comments);
+        return CommentResponses.fromComments(comments);
     }
 
     @Transactional(readOnly = true)
-    public CommentsResponse findCommentsByArticleSlug(Long userId, Slug slug) {
+    public CommentResponses findCommentsByArticleSlug(Long userId, Slug slug) {
         User user = userService.findById(userId);
         Article article = articleService.findBySlug(slug);
 
         List<Comment> comments = commentRepository.findAllByArticle(article);
-        return CommentsResponse.fromCommentsAndUser(comments, user);
+        return CommentResponses.fromCommentsAndUser(comments, user);
     }
 
     @Transactional

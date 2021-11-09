@@ -149,30 +149,10 @@ public class User extends BaseTimeEntity {
     }
 
     private ArticleFavorite createArticleFavorite(Article article) {
-        return ArticleFavorite.builder()
-            .user(this)
-            .article(article)
-            .build();
+        return ArticleFavorite.from(this, article);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(email);
-    }
-
-    public static Builder Builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -199,7 +179,7 @@ public class User extends BaseTimeEntity {
         }
 
         public Builder profile(Username username, Bio bio, Image image) {
-            this.profile = Profile.Builder()
+            this.profile = Profile.builder()
                 .username(username)
                 .bio(bio)
                 .image(image)
@@ -230,6 +210,24 @@ public class User extends BaseTimeEntity {
         public User build() {
             return new User(id, profile, email, password, follows, favorites);
         }
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 
 }

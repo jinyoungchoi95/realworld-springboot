@@ -29,7 +29,7 @@ import com.study.realworld.article.domain.Title;
 import com.study.realworld.comment.domain.Comment;
 import com.study.realworld.comment.domain.CommentBody;
 import com.study.realworld.comment.dto.response.CommentResponse;
-import com.study.realworld.comment.dto.response.CommentsResponse;
+import com.study.realworld.comment.dto.response.CommentResponses;
 import com.study.realworld.comment.service.CommentService;
 import com.study.realworld.tag.domain.Tag;
 import com.study.realworld.testutil.PrincipalArgumentResolver;
@@ -84,7 +84,7 @@ public class CommentControllerLoginUserTest {
             .alwaysExpect(status().isOk())
             .build();
 
-        author = User.Builder()
+        author = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
@@ -116,7 +116,7 @@ public class CommentControllerLoginUserTest {
 
             comments.add(comment);
         }
-        CommentsResponse response = CommentsResponse.fromCommentsAndUser(comments, author);
+        CommentResponses response = CommentResponses.fromCommentsAndUser(comments, author);
 
         when(commentService.findCommentsByArticleSlug(userId, article.slug())).thenReturn(response);
 

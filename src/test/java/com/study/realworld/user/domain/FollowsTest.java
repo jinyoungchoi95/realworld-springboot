@@ -3,7 +3,9 @@ package com.study.realworld.user.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.study.realworld.follow.domain.Follow;
@@ -24,13 +26,13 @@ public class FollowsTest {
 
     @BeforeEach
     void beforeEach() {
-        user = User.Builder()
+        user = User.builder()
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .build();
 
-        followee = User.Builder()
+        followee = User.builder()
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("jakejake"))
@@ -182,6 +184,8 @@ public class FollowsTest {
         assertThat(result)
             .isEqualTo(Follows.of(followSet))
             .hasSameHashCodeAs(Follows.of(followSet));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

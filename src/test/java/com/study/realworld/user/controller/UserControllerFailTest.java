@@ -61,8 +61,8 @@ public class UserControllerFailTest {
     void joinFailByDuplicatedUsernameTest() throws Exception {
 
         // setup
-        User user = User.Builder()
-            .profile(Profile.Builder()
+        User user = User.builder()
+            .profile(Profile.builder()
                 .username(Username.of("username"))
                 .build())
             .email(Email.of("test@test.com"))

@@ -2,6 +2,8 @@ package com.study.realworld.article.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.tag.domain.Tag;
 import com.study.realworld.user.domain.Bio;
@@ -22,7 +24,7 @@ class ArticleTest {
 
     @BeforeEach
     void beforeEach() {
-        author = User.Builder()
+        author = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
@@ -131,6 +133,8 @@ class ArticleTest {
         assertThat(result)
             .isEqualTo(Article.from(articleContent, author))
             .hasSameHashCodeAs(Article.from(articleContent, author));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

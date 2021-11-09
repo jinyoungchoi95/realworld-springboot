@@ -1,4 +1,4 @@
-package com.study.realworld.follow.domain;
+package com.study.realworld.follow.dto.response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,57 +10,42 @@ import com.study.realworld.user.domain.Password;
 import com.study.realworld.user.domain.User;
 import com.study.realworld.user.domain.Username;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class FollowTest {
+class FollowResponseTest {
 
     private User user;
-    private User followee;
 
     @BeforeEach
     void beforeEach() {
         user = User.builder()
+            .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .build();
-
-        followee = User.builder()
-            .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
-            .email(Email.of("jakefriend@jake.jake"))
-            .password(Password.of("jakejake"))
-            .build();
     }
 
     @Test
-    void followTest() {
-        Follow follow = new Follow();
+    void followResponseTest() {
+        FollowResponse followResponse = new FollowResponse();
     }
 
     @Test
-    @DisplayName("equals hashCode 테스트")
-    void followEqualsHashCodeTest() {
+    void followResponseEqualsHashCodeTest() {
 
-        // given & when
-        Follow result = Follow.builder()
-            .follower(user)
-            .followee(followee)
-            .build();
+        // given
+        FollowResponse expected = FollowResponse.fromUserAndFollowing(user, false);
+
+        // when
+        FollowResponse result = FollowResponse.fromUserAndFollowing(user, false);
 
         // then
         assertThat(result)
-            .isEqualTo(Follow.builder()
-                .follower(user)
-                .followee(followee)
-                .build())
-            .hasSameHashCodeAs(Follow.builder()
-                .follower(user)
-                .followee(followee)
-                .build());
+            .isEqualTo(expected)
+            .hasSameHashCodeAs(expected);
         assertEquals(result, result);
         assertNotEquals(result, null);
     }
-
 
 }

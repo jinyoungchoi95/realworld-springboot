@@ -49,25 +49,7 @@ public class Profile {
         this.image = image;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Profile profile = (Profile) o;
-        return Objects.equals(username, profile.username) && Objects.equals(bio, profile.bio)
-            && Objects.equals(image, profile.image);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, bio, image);
-    }
-
-    public static Builder Builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -98,6 +80,25 @@ public class Profile {
         public Profile build() {
             return new Profile(username, bio, image);
         }
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Profile profile = (Profile) o;
+        return Objects.equals(username, profile.username) && Objects.equals(bio, profile.bio)
+            && Objects.equals(image, profile.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, bio, image);
     }
 
 }
