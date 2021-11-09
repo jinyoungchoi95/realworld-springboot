@@ -83,25 +83,6 @@ public class ArticleContent {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ArticleContent that = (ArticleContent) o;
-        return Objects.equals(slugTitle, that.slugTitle) && Objects
-            .equals(description, that.description) && Objects.equals(body, that.body) && Objects
-            .equals(tags, that.tags);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(slugTitle, description, body, tags);
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -140,6 +121,25 @@ public class ArticleContent {
             return new ArticleContent(slugTitle, description, body, tags);
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ArticleContent that = (ArticleContent) o;
+        return Objects.equals(slugTitle, that.slugTitle) && Objects
+            .equals(description, that.description) && Objects.equals(body, that.body) && Objects
+            .equals(tags, that.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(slugTitle, description, body, tags);
     }
 
 }
