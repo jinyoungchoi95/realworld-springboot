@@ -16,7 +16,7 @@ import com.study.realworld.comment.domain.Comment;
 import com.study.realworld.comment.domain.CommentBody;
 import com.study.realworld.comment.domain.CommentRepository;
 import com.study.realworld.comment.dto.response.CommentResponse;
-import com.study.realworld.comment.dto.response.CommentsResponse;
+import com.study.realworld.comment.dto.response.CommentResponses;
 import com.study.realworld.global.exception.BusinessException;
 import com.study.realworld.global.exception.ErrorCode;
 import com.study.realworld.tag.domain.Tag;
@@ -165,10 +165,10 @@ class CommentServiceTest {
                 Comment.from(commentBody, author, article));
             when(commentRepository.findAllByArticle(article)).thenReturn(comments);
 
-            CommentsResponse expected = CommentsResponse.fromComments(comments);
+            CommentResponses expected = CommentResponses.fromComments(comments);
 
             // when
-            CommentsResponse result = commentService.findCommentsByArticleSlug(slug);
+            CommentResponses result = commentService.findCommentsByArticleSlug(slug);
 
             // then
             assertThat(result).isEqualTo(expected);
@@ -225,10 +225,10 @@ class CommentServiceTest {
                 Comment.from(commentBody, author, article));
             when(commentRepository.findAllByArticle(article)).thenReturn(comments);
 
-            CommentsResponse expected = CommentsResponse.fromCommentsAndUser(comments, author);
+            CommentResponses expected = CommentResponses.fromCommentsAndUser(comments, author);
 
             // when
-            CommentsResponse result = commentService.findCommentsByArticleSlug(userId, slug);
+            CommentResponses result = commentService.findCommentsByArticleSlug(userId, slug);
 
             // then
             assertThat(result).isEqualTo(expected);

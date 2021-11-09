@@ -25,7 +25,7 @@ import com.study.realworld.article.domain.SlugTitle;
 import com.study.realworld.article.domain.Title;
 import com.study.realworld.comment.domain.Comment;
 import com.study.realworld.comment.domain.CommentBody;
-import com.study.realworld.comment.dto.response.CommentsResponse;
+import com.study.realworld.comment.dto.response.CommentResponses;
 import com.study.realworld.comment.service.CommentService;
 import com.study.realworld.tag.domain.Tag;
 import com.study.realworld.user.domain.Bio;
@@ -104,7 +104,7 @@ class CommentControllerNonLoginUserTest {
 
             comments.add(comment);
         }
-        CommentsResponse response = CommentsResponse.fromComments(comments);
+        CommentResponses response = CommentResponses.fromComments(comments);
 
         when(commentService.findCommentsByArticleSlug(article.slug())).thenReturn(response);
 

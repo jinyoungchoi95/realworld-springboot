@@ -8,28 +8,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CommentsResponse {
+public class CommentResponses {
 
     @JsonProperty("comments")
     private List<CommentResponseNested> commentResponseNesteds;
 
-    CommentsResponse() {
+    CommentResponses() {
     }
 
-    private CommentsResponse(List<CommentResponseNested> commentResponseNesteds) {
+    private CommentResponses(List<CommentResponseNested> commentResponseNesteds) {
         this.commentResponseNesteds = commentResponseNesteds;
     }
 
-    public static CommentsResponse fromComments(List<Comment> comments) {
-        return new CommentsResponse(
+    public static CommentResponses fromComments(List<Comment> comments) {
+        return new CommentResponses(
             comments.stream()
                 .map(CommentResponseNested::fromComment)
                 .collect(Collectors.toList())
         );
     }
 
-    public static CommentsResponse fromCommentsAndUser(List<Comment> comments, User user) {
-        return new CommentsResponse(
+    public static CommentResponses fromCommentsAndUser(List<Comment> comments, User user) {
+        return new CommentResponses(
             comments.stream()
                 .map(comment -> CommentResponseNested.fromCommentAndUser(comment, user))
                 .collect(Collectors.toList())
@@ -44,7 +44,7 @@ public class CommentsResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CommentsResponse that = (CommentsResponse) o;
+        CommentResponses that = (CommentResponses) o;
         return Objects.equals(commentResponseNesteds, that.commentResponseNesteds);
     }
 
