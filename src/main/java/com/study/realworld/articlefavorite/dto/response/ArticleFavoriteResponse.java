@@ -11,6 +11,9 @@ public class ArticleFavoriteResponse {
     @JsonProperty("article")
     private ArticleResponseNested articleResponseNested;
 
+    ArticleFavoriteResponse() {
+    }
+
     private ArticleFavoriteResponse(ArticleResponseNested articleResponseNested) {
         this.articleResponseNested = articleResponseNested;
     }
