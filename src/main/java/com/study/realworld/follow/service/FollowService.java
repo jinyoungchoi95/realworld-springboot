@@ -21,7 +21,7 @@ public class FollowService {
         User user = userService.findById(userId);
         User followee = userService.findByUsername(username);
 
-        return FollowResponse.fromProfileAndFollowing(followee.profile(), user.followUser(followee));
+        return FollowResponse.fromUserAndFollowing(followee, user.followUser(followee));
     }
 
     @Transactional
@@ -29,7 +29,7 @@ public class FollowService {
         User user = userService.findById(userId);
         User followee = userService.findByUsername(username);
 
-        return FollowResponse.fromProfileAndFollowing(followee.profile(), user.unfollowUser(followee));
+        return FollowResponse.fromUserAndFollowing(followee, user.unfollowUser(followee));
     }
 
 }

@@ -123,7 +123,7 @@ public class FollowServiceTest {
             when(userService.findById(userId)).thenReturn(user);
             when(userService.findByUsername(username)).thenReturn(followee);
 
-            FollowResponse expected = FollowResponse.fromProfileAndFollowing(followee.profile(), true);
+            FollowResponse expected = FollowResponse.fromUserAndFollowing(followee, true);
 
             // when
             FollowResponse result = followService.followUser(userId, username);
@@ -202,7 +202,7 @@ public class FollowServiceTest {
             when(userService.findById(userId)).thenReturn(user);
             when(userService.findByUsername(username)).thenReturn(followee);
 
-            FollowResponse expected = FollowResponse.fromProfileAndFollowing(followee.profile(), false);
+            FollowResponse expected = FollowResponse.fromUserAndFollowing(followee, false);
 
             // when
             FollowResponse result = followService.unfollowUser(userId, username);

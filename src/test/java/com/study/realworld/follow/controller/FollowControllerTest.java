@@ -24,7 +24,6 @@ import com.study.realworld.testutil.PrincipalArgumentResolver;
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
 import com.study.realworld.user.domain.Password;
-import com.study.realworld.user.domain.Profile;
 import com.study.realworld.user.domain.User;
 import com.study.realworld.user.domain.Username;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,8 +85,8 @@ class FollowControllerTest {
 
         // setup
         String username = followee.username().value();
-        Profile expected = followee.profile();
-        FollowResponse response = FollowResponse.fromProfileAndFollowing(expected, true);
+        User expected = followee;
+        FollowResponse response = FollowResponse.fromUserAndFollowing(expected, true);
         when(followService.followUser(1L, followee.username())).thenReturn(response);
 
         // given
@@ -128,8 +127,8 @@ class FollowControllerTest {
 
         // setup
         String username = followee.username().value();
-        Profile expected = followee.profile();
-        FollowResponse response = FollowResponse.fromProfileAndFollowing(expected, false);
+        User expected = followee;
+        FollowResponse response = FollowResponse.fromUserAndFollowing(expected, false);
         when(followService.unfollowUser(1L, followee.username())).thenReturn(response);
 
         // given

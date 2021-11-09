@@ -1,7 +1,7 @@
 package com.study.realworld.follow.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.study.realworld.user.domain.Profile;
+import com.study.realworld.user.domain.User;
 import com.study.realworld.user.dto.response.ProfileResponse.ProfileResponseNested;
 import java.util.Objects;
 
@@ -17,8 +17,8 @@ public class FollowResponse {
         this.profileResponseNested = profileResponseNested;
     }
 
-    public static FollowResponse fromProfileAndFollowing(Profile profile, boolean following) {
-        return new FollowResponse(ProfileResponseNested.fromProfileAndFollowing(profile, following));
+    public static FollowResponse fromUserAndFollowing(User user, boolean following) {
+        return new FollowResponse(ProfileResponseNested.fromProfileAndFollowing(user.profile(), following));
     }
 
     @Override
