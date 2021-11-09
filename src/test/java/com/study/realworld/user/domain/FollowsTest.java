@@ -3,7 +3,9 @@ package com.study.realworld.user.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.study.realworld.follow.domain.Follow;
@@ -182,6 +184,8 @@ public class FollowsTest {
         assertThat(result)
             .isEqualTo(Follows.of(followSet))
             .hasSameHashCodeAs(Follows.of(followSet));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }
