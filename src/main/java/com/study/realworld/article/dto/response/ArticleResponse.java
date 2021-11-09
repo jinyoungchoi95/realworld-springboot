@@ -139,7 +139,13 @@ public class ArticleResponse {
             ArticleResponseNested that = (ArticleResponseNested) o;
             return favorited == that.favorited && favoritesCount == that.favoritesCount && Objects.equals(slug, that.slug)
                 && Objects.equals(title, that.title) && Objects.equals(description, that.description)
-                && Objects.equals(body, that.body) && Objects.equals(tags, that.tags);
+                && Objects.equals(body, that.body) && Objects.equals(tags, that.tags) && Objects
+                .equals(profileResponseNested, that.profileResponseNested);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(slug, title, description, body, tags, favorited, favoritesCount, profileResponseNested);
         }
 
     }
