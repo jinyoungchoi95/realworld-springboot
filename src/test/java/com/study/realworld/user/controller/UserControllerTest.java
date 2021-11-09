@@ -73,7 +73,7 @@ class UserControllerTest {
     void joinTest() throws Exception {
 
         // setup
-        User user = User.Builder()
+        User user = User.builder()
             .profile(Profile.Builder()
                 .username(Username.of("username"))
                 .build())
@@ -137,7 +137,7 @@ class UserControllerTest {
     void loginTest() throws Exception {
 
         // setup
-        User user = User.Builder()
+        User user = User.builder()
             .profile(Profile.Builder()
                 .username(Username.of("username"))
                 .build())
@@ -194,7 +194,7 @@ class UserControllerTest {
     void getCurrentUserTest() throws Exception {
 
         // setup
-        User user = User.Builder()
+        User user = User.builder()
             .profile(Profile.Builder()
                 .username(Username.of("username"))
                 .build())
@@ -244,7 +244,7 @@ class UserControllerTest {
     void updateTest() throws Exception {
 
         // setup
-        User user = User.Builder()
+        User user = User.builder()
             .profile(Profile.Builder()
                 .username(Username.of("usernameChange"))
                 .bio(Bio.of("bioChange"))

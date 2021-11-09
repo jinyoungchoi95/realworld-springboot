@@ -84,7 +84,7 @@ public class CommentControllerLoginUserTest {
             .alwaysExpect(status().isOk())
             .build();
 
-        author = User.Builder()
+        author = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))

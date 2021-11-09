@@ -62,7 +62,7 @@ class CommentServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        author = User.Builder()
+        author = User.builder()
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
@@ -295,7 +295,7 @@ class CommentServiceTest {
 
             // setup & given
             Long userId = 1L;
-            User user = User.Builder()
+            User user = User.builder()
                 .email(Email.of("email1@email1.com"))
                 .build();
             Slug slug = Slug.of("how-to-train-your-dragon");

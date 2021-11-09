@@ -63,7 +63,7 @@ class JjwtServiceTest {
     void getUserTest() {
 
         // setup
-        User user = User.Builder().build();
+        User user = User.builder().build();
         when(userRepository.findById(2L)).thenReturn(ofNullable(user));
 
         // given

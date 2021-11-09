@@ -59,14 +59,14 @@ class ArticleFavoriteServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        user = User.Builder()
+        user = User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .build();
 
-        author = User.Builder()
+        author = User.builder()
             .id(2L)
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
@@ -126,7 +126,7 @@ class ArticleFavoriteServiceTest {
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
             ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
-            user = User.Builder()
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
@@ -224,7 +224,7 @@ class ArticleFavoriteServiceTest {
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
             ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
-            user = User.Builder()
+            user = User.builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))

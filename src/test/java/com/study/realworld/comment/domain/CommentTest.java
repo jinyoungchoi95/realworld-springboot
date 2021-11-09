@@ -35,7 +35,7 @@ public class CommentTest {
 
     @BeforeEach
     void beforeEach() {
-        author = User.Builder()
+        author = User.builder()
             .email(Email.of("email@email.com"))
             .password(Password.of("password"))
             .profile(Username.of("username"), Bio.of("bio"), Image.of("image"))
@@ -65,7 +65,7 @@ public class CommentTest {
 
             // given
             Comment comment = Comment.from(commentBody, author, article);
-            User user = User.Builder()
+            User user = User.builder()
                 .email(Email.of("email2@email2.com"))
                 .password(Password.of("password"))
                 .profile(Username.of("username2"), Bio.of("bio"), Image.of("image"))

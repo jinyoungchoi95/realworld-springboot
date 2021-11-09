@@ -60,7 +60,7 @@ class ProfileControllerNonLoginUserTest {
             .alwaysExpect(status().isOk())
             .build();
 
-        user = com.study.realworld.user.domain.User.Builder()
+        user = com.study.realworld.user.domain.User.builder()
             .id(1L)
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))

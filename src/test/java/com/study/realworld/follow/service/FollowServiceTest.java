@@ -40,14 +40,14 @@ public class FollowServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        user = User.Builder()
+        user = User.builder()
             .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jake@jake.jake"))
             .password(Password.of("jakejake"))
             .follows(Follows.of(new HashSet<>()))
             .build();
 
-        followee = User.Builder()
+        followee = User.builder()
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("jakejake"))
@@ -100,7 +100,7 @@ public class FollowServiceTest {
                 .followee(followee)
                 .build();
             followSet.add(follow);
-            user = User.Builder()
+            user = User.builder()
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
                 .password(Password.of("jakejake"))
@@ -193,7 +193,7 @@ public class FollowServiceTest {
                 .followee(followee)
                 .build();
             followSet.add(follow);
-            user = User.Builder()
+            user = User.builder()
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
                 .email(Email.of("jake@jake.jake"))
                 .password(Password.of("jakejake"))

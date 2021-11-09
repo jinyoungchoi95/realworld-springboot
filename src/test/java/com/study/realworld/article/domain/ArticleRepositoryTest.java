@@ -48,14 +48,14 @@ class ArticleRepositoryTest {
         String username = "user";
         String email = "@test.com";
         for (int i = 1; i <= 10; i++) {
-            userRepository.save(User.Builder()
+            userRepository.save(User.builder()
                 .profile(Username.of(username + i), null, null)
                 .email(Email.of(username + i + email))
                 .password(Password.of("password"))
                 .build());
         }
 
-        User favoritingUser = userRepository.save(User.Builder()
+        User favoritingUser = userRepository.save(User.builder()
             .profile(Username.of("jakefriend"), Bio.of("I work at statefarm"), null)
             .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("jakejake"))

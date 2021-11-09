@@ -152,7 +152,7 @@ public class User extends BaseTimeEntity {
         return ArticleFavorite.from(this, article);
     }
 
-    public static Builder Builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
