@@ -71,10 +71,7 @@ class ArticleFavoritesTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
             ArticleFavorites favorites = ArticleFavorites.of(favoriteSet);
 
@@ -90,16 +87,10 @@ class ArticleFavoritesTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             ArticleFavorites favorites = ArticleFavorites.of(favoriteSet);
 
-            ArticleFavorite expected = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite expected = ArticleFavorite.from(user, article);
 
             // when
             ArticleFavorite result = favorites.checkCanFavorite(favorite);
@@ -120,10 +111,7 @@ class ArticleFavoritesTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             ArticleFavorites favorites = ArticleFavorites.of(favoriteSet);
 
             // when & then
@@ -138,17 +126,11 @@ class ArticleFavoritesTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
             ArticleFavorites favorites = ArticleFavorites.of(favoriteSet);
 
-            ArticleFavorite expected = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite expected = ArticleFavorite.from(user, article);
 
             // when
             ArticleFavorite result = favorites.checkCanUnfavorite(favorite);
@@ -163,10 +145,7 @@ class ArticleFavoritesTest {
     @DisplayName("isFavoriteArticle 팔로윙 유무체크 기능 테스트")
     class isFavoriteArticleTest {
 
-        private ArticleFavorite articleFavorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article)
-            .build();
+        private ArticleFavorite articleFavorite = ArticleFavorite.from(user, article);
 
         @Test
         @DisplayName("true")
@@ -206,10 +185,7 @@ class ArticleFavoritesTest {
 
         // given
         Set<ArticleFavorite> articleFavoriteSet = new HashSet<>();
-        ArticleFavorite favorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article)
-            .build();
+        ArticleFavorite favorite = ArticleFavorite.from(user, article);
         articleFavoriteSet.add(favorite);
 
         // when

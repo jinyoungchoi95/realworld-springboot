@@ -150,7 +150,7 @@ public class ArticleServiceIntegrationTest {
 
         for (Article inputArticle : articles) {
             Article article = articleRepository.save(inputArticle);
-            articleFavoriteRepository.save(ArticleFavorite.builder().user(favoritingUser).article(article).build());
+            articleFavoriteRepository.save(ArticleFavorite.from(favoritingUser, article));
         }
         entityManager.flush();
         entityManager.clear();

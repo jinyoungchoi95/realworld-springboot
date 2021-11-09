@@ -124,10 +124,7 @@ class ArticleFavoriteServiceTest {
             Long userId = 1L;
             Slug slug = article.slug();
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
             user = User.Builder()
                 .id(1L)
@@ -225,10 +222,7 @@ class ArticleFavoriteServiceTest {
             Long userId = 1L;
             Slug slug = article.slug();
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
             user = User.Builder()
                 .id(1L)

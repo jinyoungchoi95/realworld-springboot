@@ -51,10 +51,7 @@ class FavoritingUsersTest {
     void sizeTest() {
 
         // given
-        ArticleFavorite articleFavorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article)
-            .build();
+        ArticleFavorite articleFavorite = ArticleFavorite.from(user, article);
         Set<ArticleFavorite> articleFavoriteSet = new HashSet<>();
         articleFavoriteSet.add(articleFavorite);
         FavoritingUsers favoritingUsers = FavoritingUsers.of(articleFavoriteSet);
@@ -71,10 +68,7 @@ class FavoritingUsersTest {
     void favoritingUsersEqualsHashCodeTest() {
 
         // given
-        ArticleFavorite articleFavorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article)
-            .build();
+        ArticleFavorite articleFavorite = ArticleFavorite.from(user, article);
         Set<ArticleFavorite> articleFavoriteSet = new HashSet<>();
         articleFavoriteSet.add(articleFavorite);
 

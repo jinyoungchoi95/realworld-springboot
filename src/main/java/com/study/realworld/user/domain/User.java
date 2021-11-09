@@ -149,10 +149,7 @@ public class User extends BaseTimeEntity {
     }
 
     private ArticleFavorite createArticleFavorite(Article article) {
-        return ArticleFavorite.builder()
-            .user(this)
-            .article(article)
-            .build();
+        return ArticleFavorite.from(this, article);
     }
 
     @Override

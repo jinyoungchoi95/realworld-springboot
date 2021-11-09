@@ -73,7 +73,7 @@ class ArticleRepositoryTest {
                 .tags(Arrays.asList(Tag.of("tag" + i), Tag.of("tagA")))
                 .build();
             Article article = articleRepository.save(Article.from(articleContent, author1));
-            articleFavoriteRepository.save(ArticleFavorite.builder().user(favoritingUser).article(article).build());
+            articleFavoriteRepository.save(ArticleFavorite.from(favoritingUser, article));
         }
 
         User author2 = userRepository.findById(2L).orElse(null);

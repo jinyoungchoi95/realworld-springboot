@@ -37,6 +37,10 @@ public class ArticleFavorite {
         this.article = article;
     }
 
+    public static ArticleFavorite from(User user, Article article) {
+        return new ArticleFavorite(user, article);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -52,34 +56,6 @@ public class ArticleFavorite {
     @Override
     public int hashCode() {
         return Objects.hash(user, article);
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-
-        private User user;
-        private Article article;
-
-        private Builder() {
-        }
-
-        public Builder user(User user) {
-            this.user = user;
-            return this;
-        }
-
-        public Builder article(Article article) {
-            this.article = article;
-            return this;
-        }
-
-        public ArticleFavorite build() {
-            return new ArticleFavorite(user, article);
-        }
-
     }
 
 }

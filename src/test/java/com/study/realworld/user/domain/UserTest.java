@@ -215,9 +215,7 @@ class UserTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article).build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
             user = User.Builder()
                 .id(1L)
@@ -239,9 +237,7 @@ class UserTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article).build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             user = User.Builder()
                 .id(1L)
                 .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
@@ -250,10 +246,7 @@ class UserTest {
                 .articleFavorites(ArticleFavorites.of(favoriteSet))
                 .build();
 
-            ArticleFavorite expected = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite expected = ArticleFavorite.from(user, article);
 
             // when
             ArticleFavorite result = user.createFavoriteForFavoriting(article);
@@ -284,9 +277,7 @@ class UserTest {
 
             // given
             Set<ArticleFavorite> favoriteSet = new HashSet<>();
-            ArticleFavorite favorite = ArticleFavorite.builder()
-                .user(user)
-                .article(article).build();
+            ArticleFavorite favorite = ArticleFavorite.from(user, article);
             favoriteSet.add(favorite);
             user = User.Builder()
                 .id(1L)
@@ -296,10 +287,7 @@ class UserTest {
                 .articleFavorites(ArticleFavorites.of(favoriteSet))
                 .build();
 
-            ArticleFavorite expected = ArticleFavorite.builder()
-                .user(user)
-                .article(article)
-                .build();
+            ArticleFavorite expected = ArticleFavorite.from(user, article);
 
             // when
             ArticleFavorite result = user.createFavoriteForUnfavoriting(article);
@@ -316,9 +304,7 @@ class UserTest {
 
         // given
         Set<ArticleFavorite> favoriteSet = new HashSet<>();
-        ArticleFavorite favorite = ArticleFavorite.builder()
-            .user(user)
-            .article(article).build();
+        ArticleFavorite favorite = ArticleFavorite.from(user, article);
         favoriteSet.add(favorite);
         user = User.Builder()
             .id(1L)
