@@ -2,6 +2,8 @@ package com.study.realworld.article.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.global.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
@@ -59,6 +61,8 @@ class DescriptionTest {
         assertThat(result)
             .isEqualTo(Description.of(input))
             .hasSameHashCodeAs(Description.of(input));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }
