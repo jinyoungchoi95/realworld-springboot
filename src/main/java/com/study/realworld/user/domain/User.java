@@ -152,23 +152,6 @@ public class User extends BaseTimeEntity {
         return ArticleFavorite.from(this, article);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(email);
-    }
-
     public static Builder Builder() {
         return new Builder();
     }
@@ -227,6 +210,24 @@ public class User extends BaseTimeEntity {
         public User build() {
             return new User(id, profile, email, password, follows, favorites);
         }
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 
 }
