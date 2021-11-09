@@ -40,23 +40,6 @@ public class Follow {
         return followee;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Follow follow = (Follow) o;
-        return Objects.equals(follower, follow.follower) && Objects.equals(followee, follow.followee);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(follower, followee);
-    }
-
     public static Builder builder() {
         return new Builder();
     }
@@ -83,6 +66,23 @@ public class Follow {
             return new Follow(follower, followee);
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Follow follow = (Follow) o;
+        return Objects.equals(follower, follow.follower) && Objects.equals(followee, follow.followee);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(follower, followee);
     }
 
 }

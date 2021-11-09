@@ -1,6 +1,8 @@
 package com.study.realworld.follow.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
@@ -56,6 +58,8 @@ class FollowTest {
                 .follower(user)
                 .followee(followee)
                 .build());
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 
