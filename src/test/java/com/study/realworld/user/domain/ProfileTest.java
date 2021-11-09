@@ -19,14 +19,14 @@ public class ProfileTest {
     void profileEqualsHashCodeTest() {
 
         // given
-        Profile expected = Profile.Builder()
+        Profile expected = Profile.builder()
             .username(Username.of("username"))
             .bio(Bio.of("bio"))
             .image(Image.of("image"))
             .build();
 
         // when
-        Profile result = Profile.Builder()
+        Profile result = Profile.builder()
             .username(Username.of("username"))
             .bio(Bio.of("bio"))
             .image(Image.of("image"))

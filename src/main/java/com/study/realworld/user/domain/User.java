@@ -179,7 +179,7 @@ public class User extends BaseTimeEntity {
         }
 
         public Builder profile(Username username, Bio bio, Image image) {
-            this.profile = Profile.Builder()
+            this.profile = Profile.builder()
                 .username(username)
                 .bio(bio)
                 .image(image)

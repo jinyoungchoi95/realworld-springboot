@@ -74,7 +74,7 @@ class UserControllerTest {
 
         // setup
         User user = User.builder()
-            .profile(Profile.Builder()
+            .profile(Profile.builder()
                 .username(Username.of("username"))
                 .build())
             .email(Email.of("test@test.com"))
@@ -138,7 +138,7 @@ class UserControllerTest {
 
         // setup
         User user = User.builder()
-            .profile(Profile.Builder()
+            .profile(Profile.builder()
                 .username(Username.of("username"))
                 .build())
             .email(Email.of("test@test.com"))
@@ -195,7 +195,7 @@ class UserControllerTest {
 
         // setup
         User user = User.builder()
-            .profile(Profile.Builder()
+            .profile(Profile.builder()
                 .username(Username.of("username"))
                 .build())
             .email(Email.of("test@test.com"))
@@ -245,7 +245,7 @@ class UserControllerTest {
 
         // setup
         User user = User.builder()
-            .profile(Profile.Builder()
+            .profile(Profile.builder()
                 .username(Username.of("usernameChange"))
                 .bio(Bio.of("bioChange"))
                 .image(Image.of("imageChange"))

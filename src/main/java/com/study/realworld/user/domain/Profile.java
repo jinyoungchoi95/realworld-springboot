@@ -49,7 +49,7 @@ public class Profile {
         this.image = image;
     }
 
-    public static Builder Builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
