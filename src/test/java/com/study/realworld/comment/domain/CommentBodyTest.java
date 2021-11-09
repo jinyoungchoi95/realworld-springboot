@@ -2,6 +2,8 @@ package com.study.realworld.comment.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import com.study.realworld.global.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
@@ -41,6 +43,8 @@ public class CommentBodyTest {
         assertThat(result)
             .isEqualTo(CommentBody.of(input))
             .hasSameHashCodeAs(CommentBody.of(input));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }

@@ -27,7 +27,7 @@ public class CommentBody {
         return new CommentBody(body);
     }
 
-    public static void checkBody(String body) {
+    private static void checkBody(String body) {
         checkArgument(Objects.nonNull(body), ErrorCode.INVALID_COMMENT_BODY_NULL);
     }
 
