@@ -1,6 +1,8 @@
 package com.study.realworld.user.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,13 +19,17 @@ public class ImageTest {
     void imageEqualsHashCodeTest() {
 
         // given
-        Image image = Image.of("image");
-        Image copyImage = Image.of("image");
+        String image = "image";
 
-        // when & then
-        assertThat(image)
-            .isEqualTo(copyImage)
-            .hasSameHashCodeAs(copyImage);
+        // when
+        Image result = Image.of(image);
+
+        // then
+        assertThat(result)
+            .isEqualTo(Image.of(image))
+            .hasSameHashCodeAs(Image.of(image));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }
