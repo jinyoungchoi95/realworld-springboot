@@ -1,6 +1,8 @@
 package com.study.realworld.article.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,8 @@ class SlugTitleTest {
         assertThat(result)
             .isEqualTo(SlugTitle.of(title))
             .hasSameHashCodeAs(SlugTitle.of(title));
+        assertEquals(result, result);
+        assertNotEquals(result, null);
     }
 
 }
