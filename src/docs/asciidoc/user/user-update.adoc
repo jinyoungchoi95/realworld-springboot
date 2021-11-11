@@ -1,0 +1,25 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Update User
+`PUT /api/user` +
+//When you want to register as a member, you can request it through the API and register as a member.
+//
+//API Request body must be requested with `username`, `email` and `password`.
+
+==== Request
+===== Request Header
+include::{path}/user-update/request-headers.adoc[]
+===== Request Field
+include::{path}/user-update/request-fields.adoc[]
+===== Example Request Body
+include::{path}/user-update/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/user-update/response-fields.adoc[]
+===== Example Response Body
+include::{path}/user-update/http-response.adoc[]

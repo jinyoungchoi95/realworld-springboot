@@ -266,9 +266,9 @@ class UserControllerTest {
                 getDocumentResponse(),
                 requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username for update"),
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email for update"),
-                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("user's password for update"),
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username for update").optional(),
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email for update").optional(),
+                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("user's password for update").optional(),
                     fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio for update").optional(),
                     fieldWithPath("user.image").type(JsonFieldType.STRING).description("user's image for update").optional()
                 ),

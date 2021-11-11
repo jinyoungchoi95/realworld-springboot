@@ -9,7 +9,7 @@
 When you want to get current user info, you can request it through the API with token.
 
 ==== Request
-===== Header
+===== Request Header
 include::{path}/user-get-current/request-headers.adoc[]
 ===== Example Request Body
 include::{path}/user-get-current/http-request.adoc[]
