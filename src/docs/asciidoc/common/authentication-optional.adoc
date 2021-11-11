@@ -1,0 +1,10 @@
+[cols="3,5,1a"]
+|===
+|Name |Description |Required
+
+|Authorization
+|
+Token to use APIs that require authentication +
+Authorization: Token {jwt.token.here}
+|Optional
+|===

@@ -1,2 +1,11 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
 = Real World API
 jinyoungchoi095;
+
+== User
+include::{docdir}/user/user-registor.adoc[]
