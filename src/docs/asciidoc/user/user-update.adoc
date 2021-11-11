@@ -6,9 +6,7 @@
 
 === Update User
 `PUT /api/user` +
-//When you want to register as a member, you can request it through the API and register as a member.
-//
-//API Request body must be requested with `username`, `email` and `password`.
+When you want to update your information, you can update it by requesting the API with the update information.
 
 ==== Request
 ===== Request Header
