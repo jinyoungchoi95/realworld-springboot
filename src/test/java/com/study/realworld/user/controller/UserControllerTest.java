@@ -108,7 +108,7 @@ class UserControllerTest {
             .andExpect(jsonPath("$.user.bio", is(user.bio().value())))
             .andExpect(jsonPath("$.user.image", is(nullValue())))
             .andExpect(jsonPath("$.user.token", is("token")))
-            .andDo(document("user-join",
+            .andDo(document("user-registration",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestFields(
@@ -159,7 +159,7 @@ class UserControllerTest {
             .andExpect(jsonPath("$.user.bio", is(user.bio().value())))
             .andExpect(jsonPath("$.user.image", is(nullValue())))
             .andExpect(jsonPath("$.user.token", is("token")))
-            .andDo(document("user-login",
+            .andDo(document("user-authentication",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestFields(

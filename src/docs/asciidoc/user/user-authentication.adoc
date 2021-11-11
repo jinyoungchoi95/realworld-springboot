@@ -11,12 +11,12 @@ API Request body must be requested with `email` and `password`.
 
 ==== Request
 ===== Request Field
-include::{path}/user-login/request-fields.adoc[]
+include::{path}/user-authentication/request-fields.adoc[]
 ===== Request Example
-include::{path}/user-login/http-request.adoc[]
+include::{path}/user-authentication/http-request.adoc[]
 
 ==== Response
 ===== Response Field
-include::{path}/user-login/response-fields.adoc[]
+include::{path}/user-authentication/response-fields.adoc[]
 ===== Response Example
-include::{path}/user-login/http-response.adoc[]
+include::{path}/user-authentication/http-response.adoc[]
