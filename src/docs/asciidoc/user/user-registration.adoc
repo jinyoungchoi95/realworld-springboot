@@ -5,7 +5,8 @@
 :path: ../../../../build/generated-snippets
 
 === Registration
-`POST /api/users` +
+`POST /api/users`
+
 When you want to register as a member, you can request it through the API and register as a member.
 
 API Request body must be requested with `username`, `email` and `password`.

@@ -5,8 +5,10 @@
 :path: ../../../../build/generated-snippets
 
 === Authentication
-`POST /api/users/login` +
+`POST /api/users/login`
+
 When you want to use an API that requires authentication, you can authenticate by issuing a token through the API.
+
 API Request body must be requested with `email` and `password`.
 
 ==== Request

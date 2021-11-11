@@ -5,7 +5,8 @@
 :path: ../../../../build/generated-snippets
 
 === Get Current User
-`GET /api/user` +
+`GET /api/user`
+
 When you want to get current user info, you can request it through the API with token.
 
 ==== Request

@@ -1,0 +1,44 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Get Profile
+`GET /api/profiles/:username`
+
+When you want to search the profile of a person with {username}, you can search by requesting the API.
+
+When logged in, the following information for the user is updated.
+
+include::../common/authentication-optional.adoc[]
+
+=== Get Profile (No Authentication)
+`GET /api/profiles/:username`
+
+==== Request
+===== Path Params
+include::{path}/get-profile-nonlogin/path-parameters.adoc[]
+===== Example Request Body
+include::{path}/get-profile-nonlogin/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/get-profile-nonlogin/response-fields.adoc[]
+===== Example Response Body
+include::{path}/get-profile-nonlogin/http-response.adoc[]
+
+=== Get Profile (Authentication)
+`GET /api/profiles/:username`
+
+==== Request
+===== Path Params
+include::{path}/get-profile-nonlogin/path-parameters.adoc[]
+===== Example Request Body
+include::{path}/get-profile-login/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/get-profile-login/response-fields.adoc[]
+===== Example Response Body
+include::{path}/get-profile-login/http-response.adoc[]
