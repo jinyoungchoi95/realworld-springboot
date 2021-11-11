@@ -1,11 +1,14 @@
 package com.study.realworld.user.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -191,6 +194,7 @@ class UserControllerTest {
         AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(1L, "token");
         ResultActions resultActions = mockMvc.perform(get(URL)
             .principal(authenticationToken)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -207,6 +211,7 @@ class UserControllerTest {
             .andDo(document("user-get-current",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
                     fieldWithPath("user.token").type(JsonFieldType.STRING).description("user's login token"),
