@@ -23,6 +23,7 @@ import com.study.realworld.global.security.JwtAuthentication;
 import com.study.realworld.global.security.JwtService;
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
+import com.study.realworld.user.domain.Image;
 import com.study.realworld.user.domain.Password;
 import com.study.realworld.user.domain.User;
 import com.study.realworld.user.domain.Username;
@@ -221,7 +222,13 @@ class UserControllerTest {
     void updateTest() throws Exception {
 
         // setup
-        when(userService.update(any(), any())).thenReturn(user);
+        User changedUser = User.builder()
+            .id(1L)
+            .profile(Username.of("jakefriend"), Bio.of("I like to skateboard"), Image.of("https://i.stack.imgur.com/xHWG8.jpg"))
+            .email(Email.of("jakefriend@jake.jake"))
+            .password(Password.of("passwordChange"))
+            .build();
+        when(userService.update(any(), any())).thenReturn(changedUser);
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(1L, "token"));
 
         // given
@@ -244,10 +251,10 @@ class UserControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
-            .andExpect(jsonPath("$.user.username", is("jakefriend")))
-            .andExpect(jsonPath("$.user.email", is("jakefriend@jake.jake")))
-            .andExpect(jsonPath("$.user.bio", is("I like to skateboard")))
-            .andExpect(jsonPath("$.user.image", is("https://i.stack.imgur.com/xHWG8.jpg")))
+            .andExpect(jsonPath("$.user.username", is(changedUser.username().value())))
+            .andExpect(jsonPath("$.user.email", is(changedUser.email().value())))
+            .andExpect(jsonPath("$.user.bio", is(changedUser.bio().value())))
+            .andExpect(jsonPath("$.user.image", is(changedUser.image().value())))
             .andExpect(jsonPath("$.user.token", is("token")))
             .andDo(document("user-update",
                 getDocumentRequest(),
