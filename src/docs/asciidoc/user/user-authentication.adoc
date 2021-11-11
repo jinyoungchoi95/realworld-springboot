@@ -1,0 +1,22 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Authentication
+`POST /api/users/login` +
+When you want to use an API that requires authentication, you can authenticate by issuing a token through the API.
+API Request body must be requested with `email` and `password`.
+
+==== Request
+===== Request Field
+include::{path}/user-login/request-fields.adoc[]
+===== Request Example
+include::{path}/user-login/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/user-login/response-fields.adoc[]
+===== Response Example
+include::{path}/user-login/http-response.adoc[]

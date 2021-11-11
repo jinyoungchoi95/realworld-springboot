@@ -8,4 +8,4 @@
 jinyoungchoi095;
 
 == User
-include::{docdir}/user/user-registor.adoc[]
+include::{docdir}/user/user-authentication.adoc[]
