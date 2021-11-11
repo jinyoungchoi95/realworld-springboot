@@ -1,0 +1,21 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Get Current User
+`GET /api/user` +
+When you want to get current user info, you can request it through the API with token.
+
+==== Request
+===== Header
+include::{path}/user-get-current/request-headers.adoc[]
+===== Example Request Body
+include::{path}/user-get-current/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/user-get-current/response-fields.adoc[]
+===== Example Response Body
+include::{path}/user-get-current/http-response.adoc[]
