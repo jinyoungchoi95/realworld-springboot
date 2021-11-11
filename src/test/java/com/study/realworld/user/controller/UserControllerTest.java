@@ -6,6 +6,7 @@ import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRe
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.study.realworld.global.security.JwtAuthentication;
 import com.study.realworld.global.security.JwtService;
+import com.study.realworld.testutil.PrincipalArgumentResolver;
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
 import com.study.realworld.user.domain.Image;
@@ -41,8 +43,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -69,6 +69,7 @@ class UserControllerTest {
         SecurityContextHolder.clearContext();
         mockMvc = MockMvcBuilders.standaloneSetup(userController)
             .apply(documentationConfiguration(restDocumentationContextProvider))
+            .setCustomArgumentResolvers(new PrincipalArgumentResolver())
             .alwaysExpect(status().isOk())
             .build();
 
@@ -184,16 +185,14 @@ class UserControllerTest {
     void getCurrentUserTest() throws Exception {
 
         // setup
-        when(userService.findById(any())).thenReturn(user);
+        when(userService.findById(user.id())).thenReturn(user);
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(1L, "token"));
 
         // given
         final String URL = "/api/user";
 
         // when
-        AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(1L, "token");
         ResultActions resultActions = mockMvc.perform(get(URL)
-            .principal(authenticationToken)
             .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -233,7 +232,7 @@ class UserControllerTest {
             .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("passwordChange"))
             .build();
-        when(userService.update(any(), any())).thenReturn(changedUser);
+        when(userService.update(any(), eq(user.id()))).thenReturn(changedUser);
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(1L, "token"));
 
         // given
@@ -247,6 +246,7 @@ class UserControllerTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(put(URL)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -264,6 +264,7 @@ class UserControllerTest {
             .andDo(document("user-update",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username for update"),
                     fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email for update"),
