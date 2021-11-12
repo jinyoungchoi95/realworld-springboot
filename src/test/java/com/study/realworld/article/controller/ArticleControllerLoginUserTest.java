@@ -513,7 +513,7 @@ class ArticleControllerLoginUserTest {
             .andExpect(jsonPath("$.article.author.image", is(nullValue())))
             .andExpect(jsonPath("$.article.author.following", is(false)))
 
-            .andDo(document("article-create",
+            .andDo(document("article-update",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(getAuthorizationHeaderDescriptor()),
