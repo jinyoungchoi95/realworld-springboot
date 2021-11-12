@@ -13,7 +13,7 @@ When logged in, the following information for the user is updated.
 
 include::../common/authentication-optional.adoc[]
 
-=== Get Profile (No Authentication)
+==== Get Profile (No Authentication)
 `GET /api/profiles/:username`
 
 ==== Request
@@ -28,7 +28,7 @@ include::{path}/get-profile-nonlogin/response-fields.adoc[]
 ===== Example Response Body
 include::{path}/get-profile-nonlogin/http-response.adoc[]
 
-=== Get Profile (Authentication)
+==== Get Profile (Authentication)
 `GET /api/profiles/:username`
 
 ==== Request

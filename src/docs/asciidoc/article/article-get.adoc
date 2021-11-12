@@ -13,7 +13,7 @@ When logged in, the following information for the author and favorited article b
 
 include::../common/authentication-optional.adoc[]
 
-=== Get Article (No Authentication)
+==== Get Article (No Authentication)
 `GET /api/articles/:slug`
 
 ==== Request
@@ -28,7 +28,7 @@ include::{path}/article-find-nonlogin/response-fields.adoc[]
 ===== Example Response Body
 include::{path}/article-find-nonlogin/http-response.adoc[]
 
-=== Get Article (Authentication)
+==== Get Article (Authentication)
 `GET /api/articles/:slug`
 
 ==== Request
