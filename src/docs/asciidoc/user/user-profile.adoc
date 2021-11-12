@@ -33,7 +33,9 @@ include::{path}/get-profile-nonlogin/http-response.adoc[]
 
 ==== Request
 ===== Path Params
-include::{path}/get-profile-nonlogin/path-parameters.adoc[]
+include::{path}/get-profile-login/path-parameters.adoc[]
+===== Request Header
+include::{path}/get-profile-login/request-headers.adoc[]
 ===== Example Request Body
 include::{path}/get-profile-login/http-request.adoc[]
 

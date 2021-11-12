@@ -17,3 +17,6 @@ include::{docdir}/user/user-profile.adoc[]
 == Follow
 include::{docdir}/follow/follow-user.adoc[]
 include::{docdir}/follow/unfollow-user.adoc[]
+
+== Article
+include::{docdir}/article/article-list.adoc[]

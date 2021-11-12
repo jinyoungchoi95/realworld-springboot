@@ -234,7 +234,7 @@ public class ArticleControllerNonLoginUserTest {
 
             .andExpect(jsonPath("$.articlesCount", is(limit)))
 
-            .andDo(document("articles-find",
+            .andDo(document("articles-find-nonlogin",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestParameters(

@@ -1,5 +1,6 @@
 package com.study.realworld.article.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static java.time.ZoneOffset.UTC;
@@ -9,6 +10,8 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
@@ -209,6 +212,7 @@ class ArticleControllerLoginUserTest {
             .param("tag", "dragons")
             .param("author", "jake")
             .param("favorited", "jakefriend")
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -239,7 +243,7 @@ class ArticleControllerLoginUserTest {
 
             .andExpect(jsonPath("$.articlesCount", is(limit)))
 
-            .andDo(document("articles-find",
+            .andDo(document("articles-find-login",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestParameters(
@@ -249,6 +253,7 @@ class ArticleControllerLoginUserTest {
                     parameterWithName("author").description("filter by author username").optional(),
                     parameterWithName("favorited").description("filter by favorited user").optional()
                 ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("articles").type(JsonFieldType.ARRAY).description("articles list"),
 
