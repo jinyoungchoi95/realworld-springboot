@@ -10,7 +10,7 @@
 When you want to search articles, you can search by requesting the API.
 Provide `offset`, `limit`, `tag`, `author` or `favorited` query parameter to filter results.
 
-When logged in, the following information for the user and favorited article by user is updated.
+When logged in, the following information for the author and favorited article by user is updated.
 
 include::../common/authentication-optional.adoc[]
 

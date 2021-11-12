@@ -18,6 +18,8 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -154,6 +156,9 @@ public class CommentControllerLoginUserTest {
             .andDo(document("comments-get-login",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("slug of article to comment on")
+                ),
                 requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("comments").type(JsonFieldType.ARRAY).description("comments list"),
@@ -223,6 +228,9 @@ public class CommentControllerLoginUserTest {
             .andDo(document("comment-create",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("slug of article to comment on")
+                ),
                 requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("comment.body").type(JsonFieldType.STRING).description("comment body")
@@ -263,6 +271,10 @@ public class CommentControllerLoginUserTest {
             .andDo(document("comment-delete",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("slug of article to comment on"),
+                    parameterWithName("id").description("id of comments to delete")
+                ),
                 requestHeaders(getAuthorizationHeaderDescriptor())
             ))
         ;

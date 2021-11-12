@@ -28,3 +28,4 @@ include::{docdir}/article/article-delete.adoc[]
 
 == Comment
 include::{docdir}/comment/comment-add-to-article.adoc[]
+include::{docdir}/comment/comments-get-from-article.adoc[]
