@@ -1,5 +1,6 @@
 package com.study.realworld.tag.controller;
 
+import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -74,7 +75,8 @@ class TagControllerTest {
 
             .andExpect(jsonPath("$.tags[0]", is("reactjs")))
             .andExpect(jsonPath("$.tags[1]", is("angularjs")))
-            .andDo(document("tags",
+            .andDo(document("tags-get",
+                getDocumentRequest(),
                 getDocumentResponse(),
                 responseFields(
                     fieldWithPath("tags").type(JsonFieldType.ARRAY).description("tags array")

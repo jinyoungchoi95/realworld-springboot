@@ -34,3 +34,6 @@ include::{docdir}/comment/comment-delete.adoc[]
 == Favorite
 include::{docdir}/article/favorite/article-favorite.adoc[]
 include::{docdir}/article/favorite/article-unfavorite.adoc[]
+
+== Tag
+include::{docdir}/tag/tag-list.adoc[]
