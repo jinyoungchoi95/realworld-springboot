@@ -401,6 +401,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(post(URL)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -431,6 +432,7 @@ class ArticleControllerLoginUserTest {
             .andDo(document("article-create",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article title"),
                     fieldWithPath("article.description").type(JsonFieldType.STRING).description("article description"),
@@ -483,6 +485,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(put(URL, slug)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -513,6 +516,7 @@ class ArticleControllerLoginUserTest {
             .andDo(document("article-create",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article title").optional(),
                     fieldWithPath("article.description").type(JsonFieldType.STRING).description("article description").optional(),
@@ -548,6 +552,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(delete(URL, slug)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -557,7 +562,8 @@ class ArticleControllerLoginUserTest {
 
             .andDo(document("article-delete",
                 getDocumentRequest(),
-                getDocumentResponse()
+                getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor())
             ))
         ;
     }
