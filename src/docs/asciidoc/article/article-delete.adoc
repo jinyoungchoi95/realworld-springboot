@@ -10,6 +10,8 @@
 When you want to delete your article with {slug}, you can delete it requesting the API.
 
 ==== Request
+===== Path Parameters
+include::{path}/article-delete/path-parameters.adoc[]
 ===== Request Header
 include::{path}/article-delete/request-headers.adoc[]
 ===== Example Request Body

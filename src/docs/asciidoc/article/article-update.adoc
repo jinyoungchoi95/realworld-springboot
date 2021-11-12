@@ -12,6 +12,8 @@ When you want to update your article with {slug}, you can update it requesting t
 The `slug` also updated when the `title` is changed.
 
 ==== Request
+===== Path Parameters
+include::{path}/article-delete/path-parameters.adoc[]
 ===== Request Header
 include::{path}/article-update/request-headers.adoc[]
 ===== Request Field

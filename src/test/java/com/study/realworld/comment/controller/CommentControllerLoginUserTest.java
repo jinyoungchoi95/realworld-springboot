@@ -1,5 +1,6 @@
 package com.study.realworld.comment.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static java.time.ZoneOffset.UTC;
@@ -7,6 +8,8 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
@@ -125,6 +128,7 @@ public class CommentControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(get(URL, article.slug().slug())
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -147,9 +151,10 @@ public class CommentControllerLoginUserTest {
             .andExpect(jsonPath("$.comments.[0].author.image", is(nullValue())))
             .andExpect(jsonPath("$.comments.[0].author.following", is(false)))
 
-            .andDo(document("comments-get",
+            .andDo(document("comments-get-login",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("comments").type(JsonFieldType.ARRAY).description("comments list"),
 
@@ -194,6 +199,7 @@ public class CommentControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(post(URL, article.slug().slug())
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -217,6 +223,7 @@ public class CommentControllerLoginUserTest {
             .andDo(document("comment-create",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("comment.body").type(JsonFieldType.STRING).description("comment body")
                 ),
@@ -245,6 +252,7 @@ public class CommentControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(delete(URL, slug, id)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -254,7 +262,8 @@ public class CommentControllerLoginUserTest {
 
             .andDo(document("comment-delete",
                 getDocumentRequest(),
-                getDocumentResponse()
+                getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor())
             ))
         ;
     }

@@ -516,6 +516,9 @@ class ArticleControllerLoginUserTest {
             .andDo(document("article-update",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
                 requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article title").optional(),
@@ -563,6 +566,9 @@ class ArticleControllerLoginUserTest {
             .andDo(document("article-delete",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
                 requestHeaders(getAuthorizationHeaderDescriptor())
             ))
         ;

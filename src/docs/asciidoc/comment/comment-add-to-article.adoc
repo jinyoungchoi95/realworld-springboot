@@ -1,0 +1,26 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Add Comments to an Article
+`POST /api/articles/:slug/comments`
+
+When you want to create a comment to article with {slug}, you can request it through the API with Request Body.
+
+API Request body must be requested with `body`.
+
+==== Request
+===== Request Header
+include::{path}/comment-create/request-headers.adoc[]
+===== Request Field
+include::{path}/comment-create/request-fields.adoc[]
+===== Example Request Body
+include::{path}/comment-create/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/comment-create/response-fields.adoc[]
+===== Example Response Body
+include::{path}/comment-create/http-response.adoc[]

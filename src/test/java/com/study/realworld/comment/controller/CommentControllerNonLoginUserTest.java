@@ -135,7 +135,7 @@ class CommentControllerNonLoginUserTest {
             .andExpect(jsonPath("$.comments.[0].author.image", is(nullValue())))
             .andExpect(jsonPath("$.comments.[0].author.following", is(false)))
 
-            .andDo(document("comments-get",
+            .andDo(document("comments-get-nonlogin",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 responseFields(

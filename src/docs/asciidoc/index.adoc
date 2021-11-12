@@ -25,3 +25,6 @@ include::{docdir}/article/article-get.adoc[]
 include::{docdir}/article/article-create.adoc[]
 include::{docdir}/article/article-update.adoc[]
 include::{docdir}/article/article-delete.adoc[]
+
+== Comment
+include::{docdir}/comment/comment-add-to-article.adoc[]
