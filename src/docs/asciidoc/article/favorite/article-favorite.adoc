@@ -1,0 +1,24 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../../build/generated-snippets
+
+=== Favorite Article
+`POST /api/articles/:slug/favorite`
+
+When you want to favorite an article with {slug}, you can request it through the API.
+
+==== Request
+===== Path Parameters
+include::{path}/article-favorite/path-parameters.adoc[]
+===== Request Header
+include::{path}/article-favorite/request-headers.adoc[]
+===== Example Request Body
+include::{path}/article-favorite/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/article-favorite/response-fields.adoc[]
+===== Example Response Body
+include::{path}/article-favorite/http-response.adoc[]

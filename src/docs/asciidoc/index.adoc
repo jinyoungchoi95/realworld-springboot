@@ -30,3 +30,7 @@ include::{docdir}/article/article-delete.adoc[]
 include::{docdir}/comment/comment-add-to-article.adoc[]
 include::{docdir}/comment/comments-get-from-article.adoc[]
 include::{docdir}/comment/comment-delete.adoc[]
+
+== Favorite
+include::{docdir}/article/favorite/article-favorite.adoc[]
+include::{docdir}/article/favorite/article-unfavorite.adoc[]

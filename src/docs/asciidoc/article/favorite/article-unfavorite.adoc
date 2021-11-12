@@ -1,0 +1,24 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../../build/generated-snippets
+
+=== Unavorite Article
+`DELETE /api/articles/:slug/favorite`
+
+When you want to unfavorite an article with {slug}, you can request it through the API.
+
+==== Request
+===== Path Parameters
+include::{path}/article-unfavorite/path-parameters.adoc[]
+===== Request Header
+include::{path}/article-unfavorite/request-headers.adoc[]
+===== Example Request Body
+include::{path}/article-unfavorite/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/article-unfavorite/response-fields.adoc[]
+===== Example Response Body
+include::{path}/article-unfavorite/http-response.adoc[]
