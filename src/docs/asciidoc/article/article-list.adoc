@@ -18,7 +18,7 @@ include::../common/authentication-optional.adoc[]
 `GET /api/articles`
 
 ==== Request
-===== Request Params
+===== Query Parameters
 include::{path}/articles-find-nonlogin/request-parameters.adoc[]
 ===== Example Request Body
 include::{path}/articles-find-nonlogin/http-request.adoc[]
@@ -33,7 +33,7 @@ include::{path}/articles-find-nonlogin/http-response.adoc[]
 `GET /api/articles`
 
 ==== Request
-===== Path Params
+===== Query Parameters
 include::{path}/articles-find-login/request-parameters.adoc[]
 ===== Request Header
 include::{path}/articles-find-login/request-headers.adoc[]

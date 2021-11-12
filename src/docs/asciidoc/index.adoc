@@ -21,3 +21,4 @@ include::{docdir}/follow/unfollow-user.adoc[]
 == Article
 include::{docdir}/article/article-list.adoc[]
 include::{docdir}/article/article-feed.adoc[]
+include::{docdir}/article/article-get.adoc[]

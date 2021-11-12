@@ -11,7 +11,7 @@ When you want to search feed articles, you can search by requesting the API.
 Provide `offset`, `limit` query parameter to filter results.
 
 ==== Request
-===== Path Params
+===== Query Parameters
 include::{path}/articles-feed/request-parameters.adoc[]
 ===== Request Header
 include::{path}/articles-feed/request-headers.adoc[]

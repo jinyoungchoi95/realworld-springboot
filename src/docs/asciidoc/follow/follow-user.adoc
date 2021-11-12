@@ -10,7 +10,7 @@
 When you want to follow a user with {username},  you can follow user by requesting the API.
 
 ==== Request
-===== Path Params
+===== Path Parameters
 include::{path}/follow-profile/path-parameters.adoc[]
 ===== Request Header
 include::{path}/follow-profile/request-headers.adoc[]

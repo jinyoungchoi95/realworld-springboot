@@ -22,6 +22,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -129,6 +130,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(get(URL, slug)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -155,9 +157,13 @@ class ArticleControllerLoginUserTest {
             .andExpect(jsonPath("$.article.author.image", is(nullValue())))
             .andExpect(jsonPath("$.article.author.following", is(false)))
 
-            .andDo(document("article-find",
+            .andDo(document("article-find-login",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("article.slug").type(JsonFieldType.STRING).description("article's slug"),
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article's title"),
