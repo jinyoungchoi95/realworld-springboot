@@ -12,6 +12,8 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -135,9 +137,12 @@ class CommentControllerNonLoginUserTest {
             .andExpect(jsonPath("$.comments.[0].author.image", is(nullValue())))
             .andExpect(jsonPath("$.comments.[0].author.following", is(false)))
 
-            .andDo(document("comments-get",
+            .andDo(document("comments-get-nonlogin",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("slug of article to comment on")
+                ),
                 responseFields(
                     fieldWithPath("comments").type(JsonFieldType.ARRAY).description("comments list"),
 

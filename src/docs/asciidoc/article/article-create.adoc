@@ -1,0 +1,26 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Create Article
+`POST /api/articles`
+
+When you want to create an article, you can request it through the API with Request Body.
+
+API Request body must be requested with `title`, `description` and `body`.
+
+==== Request
+===== Request Header
+include::{path}/article-create/request-headers.adoc[]
+===== Request Field
+include::{path}/article-create/request-fields.adoc[]
+===== Example Http Request
+include::{path}/article-create/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/article-create/response-fields.adoc[]
+===== Example Http Response
+include::{path}/article-create/http-response.adoc[]

@@ -1,0 +1,24 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Registration
+`POST /api/users`
+
+When you want to register as a member, you can request it through the API and register as a member.
+
+API Request body must be requested with `username`, `email` and `password`.
+
+==== Request
+===== Request Field
+include::{path}/user-registration/request-fields.adoc[]
+===== Example Http Request
+include::{path}/user-registration/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/user-registration/response-fields.adoc[]
+===== Example Http Response
+include::{path}/user-registration/http-response.adoc[]

@@ -1,0 +1,25 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Feed Articles
+`GET /api/articles/feed`
+
+When you want to search feed articles, you can search by requesting the API.
+Provide `offset`, `limit` query parameter to filter results.
+
+==== Request
+===== Query Parameters
+include::{path}/articles-feed/request-parameters.adoc[]
+===== Request Header
+include::{path}/articles-feed/request-headers.adoc[]
+===== Example Http Request
+include::{path}/articles-feed/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/articles-feed/response-fields.adoc[]
+===== Example Http Response
+include::{path}/articles-feed/http-response.adoc[]

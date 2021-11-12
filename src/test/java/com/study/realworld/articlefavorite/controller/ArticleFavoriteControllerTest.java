@@ -1,5 +1,6 @@
 package com.study.realworld.articlefavorite.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static java.time.ZoneOffset.UTC;
@@ -7,12 +8,16 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -120,6 +125,7 @@ class ArticleFavoriteControllerTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(post(URL, slug.slug())
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -149,6 +155,10 @@ class ArticleFavoriteControllerTest {
             .andDo(document("article-favorite",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("slug of article for favorite")
+                ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("article.slug").type(JsonFieldType.STRING).description("article's slug"),
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article's title"),
@@ -189,6 +199,7 @@ class ArticleFavoriteControllerTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(delete(URL, slug.slug())
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -218,6 +229,10 @@ class ArticleFavoriteControllerTest {
             .andDo(document("article-unfavorite",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("slug of article for unfavorite")
+                ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("article.slug").type(JsonFieldType.STRING).description("article's slug"),
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article's title"),

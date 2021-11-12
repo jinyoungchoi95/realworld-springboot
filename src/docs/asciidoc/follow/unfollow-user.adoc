@@ -1,0 +1,24 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Unfollow User
+`DELETE /api/profiles/:username/follow`
+
+When you want to unfollow a user with {username},  you can unfollow user by requesting the API.
+
+==== Request
+===== Path Parameters
+include::{path}/unfollow-profile/path-parameters.adoc[]
+===== Request Header
+include::{path}/unfollow-profile/request-headers.adoc[]
+===== Example Http Request
+include::{path}/unfollow-profile/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/unfollow-profile/response-fields.adoc[]
+===== Example Http Response
+include::{path}/unfollow-profile/http-response.adoc[]

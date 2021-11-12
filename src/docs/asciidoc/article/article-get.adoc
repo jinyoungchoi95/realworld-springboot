@@ -1,0 +1,46 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Get Article
+`GET /api/articles/:slug`
+
+When you want to search article with {slug}, you can search by requesting the API.
+
+When logged in, the following information for the author and favorited article by user is updated.
+
+include::../common/authentication-optional.adoc[]
+
+==== Get Article (No Authentication)
+`GET /api/articles/:slug`
+
+==== Request
+===== Path Parameters
+include::{path}/article-find-nonlogin/path-parameters.adoc[]
+===== Example Http Request
+include::{path}/article-find-nonlogin/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/article-find-nonlogin/response-fields.adoc[]
+===== Example Http Response
+include::{path}/article-find-nonlogin/http-response.adoc[]
+
+==== Get Article (Authentication)
+`GET /api/articles/:slug`
+
+==== Request
+===== Path Parameters
+include::{path}/article-find-login/path-parameters.adoc[]
+===== Request Header
+include::{path}/article-find-login/request-headers.adoc[]
+===== Example Http Request
+include::{path}/article-find-login/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/article-find-login/response-fields.adoc[]
+===== Example Http Response
+include::{path}/article-find-login/http-response.adoc[]

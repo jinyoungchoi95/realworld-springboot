@@ -1,0 +1,20 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Get Tags
+`GET /api/tags`
+
+When you want to search tags list, you can search by requesting the API.
+
+==== Request
+===== Example Http Request
+include::{path}/tags-get/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/tags-get/response-fields.adoc[]
+===== Example Http Response
+include::{path}/tags-get/http-response.adoc[]

@@ -1,2 +1,39 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
 = Real World API
 jinyoungchoi095;
+
+== User
+include::{docdir}/user/user-authentication.adoc[]
+include::{docdir}/user/user-registration.adoc[]
+include::{docdir}/user/user-get-current.adoc[]
+include::{docdir}/user/user-update.adoc[]
+include::{docdir}/user/user-profile.adoc[]
+
+== Follow
+include::{docdir}/follow/follow-user.adoc[]
+include::{docdir}/follow/unfollow-user.adoc[]
+
+== Article
+include::{docdir}/article/article-list.adoc[]
+include::{docdir}/article/article-feed.adoc[]
+include::{docdir}/article/article-get.adoc[]
+include::{docdir}/article/article-create.adoc[]
+include::{docdir}/article/article-update.adoc[]
+include::{docdir}/article/article-delete.adoc[]
+
+== Comment
+include::{docdir}/comment/comment-add-to-article.adoc[]
+include::{docdir}/comment/comments-get-from-article.adoc[]
+include::{docdir}/comment/comment-delete.adoc[]
+
+== Favorite
+include::{docdir}/article/favorite/article-favorite.adoc[]
+include::{docdir}/article/favorite/article-unfavorite.adoc[]
+
+== Tag
+include::{docdir}/tag/tag-list.adoc[]

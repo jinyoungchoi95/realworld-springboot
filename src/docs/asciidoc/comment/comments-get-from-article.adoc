@@ -1,0 +1,46 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Get Comments from an Article
+`GET /api/articles/:slug/comments`
+
+When you want to search comments in the article with {slug}, you can search by requesting the API.
+
+When logged in, the following information for the comment's author.
+
+include::../common/authentication-optional.adoc[]
+
+==== Get Comments from an Article (No Authentication)
+`GET /api/articles/:slug/comments`
+
+==== Request
+===== Path Parameters
+include::{path}/comments-get-nonlogin/path-parameters.adoc[]
+===== Example Http Request
+include::{path}/comments-get-nonlogin/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/comments-get-nonlogin/response-fields.adoc[]
+===== Example Http Response
+include::{path}/comments-get-nonlogin/http-response.adoc[]
+
+==== Get Comments from an Article (Authentication)
+`GET /api/articles/:slug/comments`
+
+==== Request
+===== Path Parameters
+include::{path}/comments-get-login/path-parameters.adoc[]
+===== Request Header
+include::{path}/comments-get-login/request-headers.adoc[]
+===== Example Http Request
+include::{path}/comments-get-login/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/comments-get-login/response-fields.adoc[]
+===== Example Http Response
+include::{path}/comments-get-login/http-response.adoc[]

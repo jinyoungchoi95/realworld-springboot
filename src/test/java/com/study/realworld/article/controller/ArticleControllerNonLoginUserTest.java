@@ -15,6 +15,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -147,9 +148,12 @@ public class ArticleControllerNonLoginUserTest {
             .andExpect(jsonPath("$.article.author.image", is(nullValue())))
             .andExpect(jsonPath("$.article.author.following", is(false)))
 
-            .andDo(document("article-find",
+            .andDo(document("article-find-nonlogin",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
                 responseFields(
                     fieldWithPath("article.slug").type(JsonFieldType.STRING).description("article's slug"),
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article's title"),
@@ -234,7 +238,7 @@ public class ArticleControllerNonLoginUserTest {
 
             .andExpect(jsonPath("$.articlesCount", is(limit)))
 
-            .andDo(document("articles-find",
+            .andDo(document("articles-find-nonlogin",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestParameters(

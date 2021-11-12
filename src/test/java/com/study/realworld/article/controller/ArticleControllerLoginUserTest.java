@@ -1,5 +1,6 @@
 package com.study.realworld.article.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static java.time.ZoneOffset.UTC;
@@ -9,6 +10,8 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
@@ -19,6 +22,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -126,6 +130,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(get(URL, slug)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -152,9 +157,13 @@ class ArticleControllerLoginUserTest {
             .andExpect(jsonPath("$.article.author.image", is(nullValue())))
             .andExpect(jsonPath("$.article.author.following", is(false)))
 
-            .andDo(document("article-find",
+            .andDo(document("article-find-login",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("article.slug").type(JsonFieldType.STRING).description("article's slug"),
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article's title"),
@@ -209,6 +218,7 @@ class ArticleControllerLoginUserTest {
             .param("tag", "dragons")
             .param("author", "jake")
             .param("favorited", "jakefriend")
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -239,7 +249,7 @@ class ArticleControllerLoginUserTest {
 
             .andExpect(jsonPath("$.articlesCount", is(limit)))
 
-            .andDo(document("articles-find",
+            .andDo(document("articles-find-login",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestParameters(
@@ -249,6 +259,7 @@ class ArticleControllerLoginUserTest {
                     parameterWithName("author").description("filter by author username").optional(),
                     parameterWithName("favorited").description("filter by favorited user").optional()
                 ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("articles").type(JsonFieldType.ARRAY).description("articles list"),
 
@@ -303,6 +314,7 @@ class ArticleControllerLoginUserTest {
         ResultActions resultActions = mockMvc.perform(get(URL)
             .param("offset", String.valueOf(offset))
             .param("limit", String.valueOf(limit))
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -338,11 +350,9 @@ class ArticleControllerLoginUserTest {
                 getDocumentResponse(),
                 requestParameters(
                     parameterWithName("offset").description("offset/page number of articles[default=20]").optional(),
-                    parameterWithName("limit").description("limit number of articles[default=0]").optional(),
-                    parameterWithName("tag").description("filter by tag").optional(),
-                    parameterWithName("author").description("filter by author username").optional(),
-                    parameterWithName("favorited").description("filter by favorited user").optional()
+                    parameterWithName("limit").description("limit number of articles[default=0]").optional()
                 ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("articles").type(JsonFieldType.ARRAY).description("articles list"),
 
@@ -391,6 +401,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(post(URL)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -421,6 +432,7 @@ class ArticleControllerLoginUserTest {
             .andDo(document("article-create",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article title"),
                     fieldWithPath("article.description").type(JsonFieldType.STRING).description("article description"),
@@ -473,6 +485,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(put(URL, slug)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -500,9 +513,13 @@ class ArticleControllerLoginUserTest {
             .andExpect(jsonPath("$.article.author.image", is(nullValue())))
             .andExpect(jsonPath("$.article.author.following", is(false)))
 
-            .andDo(document("article-create",
+            .andDo(document("article-update",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
                     fieldWithPath("article.title").type(JsonFieldType.STRING).description("article title").optional(),
                     fieldWithPath("article.description").type(JsonFieldType.STRING).description("article description").optional(),
@@ -538,6 +555,7 @@ class ArticleControllerLoginUserTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(delete(URL, slug)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -547,7 +565,11 @@ class ArticleControllerLoginUserTest {
 
             .andDo(document("article-delete",
                 getDocumentRequest(),
-                getDocumentResponse()
+                getDocumentResponse(),
+                pathParameters(
+                    parameterWithName("slug").description("want to search article's slug")
+                ),
+                requestHeaders(getAuthorizationHeaderDescriptor())
             ))
         ;
     }

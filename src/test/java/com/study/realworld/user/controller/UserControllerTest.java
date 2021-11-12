@@ -1,11 +1,15 @@
 package com.study.realworld.user.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -21,11 +25,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.study.realworld.global.security.JwtAuthentication;
 import com.study.realworld.global.security.JwtService;
+import com.study.realworld.testutil.PrincipalArgumentResolver;
 import com.study.realworld.user.domain.Bio;
 import com.study.realworld.user.domain.Email;
 import com.study.realworld.user.domain.Image;
 import com.study.realworld.user.domain.Password;
-import com.study.realworld.user.domain.Profile;
 import com.study.realworld.user.domain.User;
 import com.study.realworld.user.domain.Username;
 import com.study.realworld.user.service.UserService;
@@ -39,8 +43,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -60,12 +62,22 @@ class UserControllerTest {
 
     private MockMvc mockMvc;
 
+    private User user;
+
     @BeforeEach
     void beforeEach(RestDocumentationContextProvider restDocumentationContextProvider) {
         SecurityContextHolder.clearContext();
         mockMvc = MockMvcBuilders.standaloneSetup(userController)
             .apply(documentationConfiguration(restDocumentationContextProvider))
+            .setCustomArgumentResolvers(new PrincipalArgumentResolver())
             .alwaysExpect(status().isOk())
+            .build();
+
+        user = User.builder()
+            .id(1L)
+            .profile(Username.of("jake"), Bio.of("I work at statefarm"), null)
+            .email(Email.of("jake@jake.jake"))
+            .password(Password.of("jakejake"))
             .build();
     }
 
@@ -73,22 +85,15 @@ class UserControllerTest {
     void joinTest() throws Exception {
 
         // setup
-        User user = User.builder()
-            .profile(Profile.builder()
-                .username(Username.of("username"))
-                .build())
-            .email(Email.of("test@test.com"))
-            .password(Password.of("password"))
-            .build();
-
         when(userService.join(any())).thenReturn(user);
         when(jwtService.createToken(user)).thenReturn("token");
 
         // given
         final String URL = "/api/users";
-        final String content = "{\"user\":{\"username\":\"" + "username"
-            + "\",\"email\":\"" + "test@test.com"
-            + "\",\"password\":\"" + "password"
+        final String content = "{\"user\":{\"username\":\"" + "jake"
+            + "\",\"email\":\"" + "jake@jake.jake"
+            + "\",\"password\":\"" + "jakejake"
+            + "\",\"bio\":\"" + "I work at statefarm"
             + "\"}}";
 
         // when
@@ -102,31 +107,27 @@ class UserControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
-            .andExpect(jsonPath("$.user.username", is("username")))
-            .andExpect(jsonPath("$.user.email", is("test@test.com")))
-            .andExpect(jsonPath("$.user.bio", is(nullValue())))
+            .andExpect(jsonPath("$.user.username", is(user.username().value())))
+            .andExpect(jsonPath("$.user.email", is(user.email().value())))
+            .andExpect(jsonPath("$.user.bio", is(user.bio().value())))
             .andExpect(jsonPath("$.user.image", is(nullValue())))
             .andExpect(jsonPath("$.user.token", is("token")))
-            .andDo(document("user-join",
+            .andDo(document("user-registration",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestFields(
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("유저이름"),
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("패스워드"),
-                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("bio")
-                        .optional(),
-                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("이미지")
-                        .optional()
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username"),
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
+                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("user's password"),
+                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio").optional(),
+                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("users' image").optional()
                 ),
                 responseFields(
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("로그인 토큰"),
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("유저이름"),
-                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("bio")
-                        .optional(),
-                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("이미지")
-                        .optional()
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
+                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("user's login token"),
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username"),
+                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio").optional(),
+                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("user's image").optional()
                 )
             ))
         ;
@@ -137,14 +138,6 @@ class UserControllerTest {
     void loginTest() throws Exception {
 
         // setup
-        User user = User.builder()
-            .profile(Profile.builder()
-                .username(Username.of("username"))
-                .build())
-            .email(Email.of("test@test.com"))
-            .password(Password.of("password"))
-            .build();
-
         when(userService.login(any(), any())).thenReturn(user);
         when(jwtService.createToken(user)).thenReturn("token");
 
@@ -165,26 +158,24 @@ class UserControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
-            .andExpect(jsonPath("$.user.username", is("username")))
-            .andExpect(jsonPath("$.user.email", is("test@test.com")))
-            .andExpect(jsonPath("$.user.bio", is(nullValue())))
+            .andExpect(jsonPath("$.user.username", is(user.username().value())))
+            .andExpect(jsonPath("$.user.email", is(user.email().value())))
+            .andExpect(jsonPath("$.user.bio", is(user.bio().value())))
             .andExpect(jsonPath("$.user.image", is(nullValue())))
             .andExpect(jsonPath("$.user.token", is("token")))
-            .andDo(document("user-login",
+            .andDo(document("user-authentication",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestFields(
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("패스워드")
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
+                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("user's password")
                 ),
                 responseFields(
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("로그인 토큰"),
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("유저이름"),
-                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("bio")
-                        .optional(),
-                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("이미지")
-                        .optional()
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
+                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("user's login token"),
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username"),
+                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio").optional(),
+                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("user's image").optional()
                 )
             ))
         ;
@@ -194,23 +185,15 @@ class UserControllerTest {
     void getCurrentUserTest() throws Exception {
 
         // setup
-        User user = User.builder()
-            .profile(Profile.builder()
-                .username(Username.of("username"))
-                .build())
-            .email(Email.of("test@test.com"))
-            .password(Password.of("password"))
-            .build();
-        when(userService.findById(any())).thenReturn(user);
+        when(userService.findById(user.id())).thenReturn(user);
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(1L, "token"));
 
         // given
         final String URL = "/api/user";
 
         // when
-        AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(1L, "1q2w3e4r");
         ResultActions resultActions = mockMvc.perform(get(URL)
-            .principal(authenticationToken)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -219,22 +202,21 @@ class UserControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
-            .andExpect(jsonPath("$.user.username", is("username")))
-            .andExpect(jsonPath("$.user.email", is("test@test.com")))
-            .andExpect(jsonPath("$.user.bio", is(nullValue())))
+            .andExpect(jsonPath("$.user.username", is(user.username().value())))
+            .andExpect(jsonPath("$.user.email", is(user.email().value())))
+            .andExpect(jsonPath("$.user.bio", is(user.bio().value())))
             .andExpect(jsonPath("$.user.image", is(nullValue())))
             .andExpect(jsonPath("$.user.token", is("token")))
             .andDo(document("user-get-current",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("로그인 토큰"),
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("유저이름"),
-                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("bio")
-                        .optional(),
-                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("이미지")
-                        .optional()
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
+                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("user's login token"),
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username"),
+                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio").optional(),
+                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("user's image").optional()
                 )
             ))
         ;
@@ -244,30 +226,27 @@ class UserControllerTest {
     void updateTest() throws Exception {
 
         // setup
-        User user = User.builder()
-            .profile(Profile.builder()
-                .username(Username.of("usernameChange"))
-                .bio(Bio.of("bioChange"))
-                .image(Image.of("imageChange"))
-                .build())
-            .email(Email.of("change@change.com"))
+        User changedUser = User.builder()
+            .id(1L)
+            .profile(Username.of("jakefriend"), Bio.of("I like to skateboard"), Image.of("https://i.stack.imgur.com/xHWG8.jpg"))
+            .email(Email.of("jakefriend@jake.jake"))
             .password(Password.of("passwordChange"))
             .build();
-
-        when(userService.update(any(), any())).thenReturn(user);
+        when(userService.update(any(), eq(user.id()))).thenReturn(changedUser);
         SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(1L, "token"));
 
         // given
         final String URL = "/api/user";
-        final String content = "{\"user\":{\"username\":\"" + "usernameChange"
-            + "\",\"email\":\"" + "change@change.com"
+        final String content = "{\"user\":{\"username\":\"" + "jakefriend"
+            + "\",\"email\":\"" + "jakefriend@jake.jake"
             + "\",\"password\":\"" + "passwordChange"
-            + "\",\"bio\":\"" + "bioChange"
-            + "\",\"image\":\"" + "imageChange"
+            + "\",\"bio\":\"" + "I like to skateboard"
+            + "\",\"image\":\"" + "https://i.stack.imgur.com/xHWG8.jpg"
             + "\"}}";
 
         // when
         ResultActions resultActions = mockMvc.perform(put(URL)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .content(content)
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
@@ -277,31 +256,28 @@ class UserControllerTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 
-            .andExpect(jsonPath("$.user.username", is("usernameChange")))
-            .andExpect(jsonPath("$.user.email", is("change@change.com")))
-            .andExpect(jsonPath("$.user.bio", is("bioChange")))
-            .andExpect(jsonPath("$.user.image", is("imageChange")))
+            .andExpect(jsonPath("$.user.username", is(changedUser.username().value())))
+            .andExpect(jsonPath("$.user.email", is(changedUser.email().value())))
+            .andExpect(jsonPath("$.user.bio", is(changedUser.bio().value())))
+            .andExpect(jsonPath("$.user.image", is(changedUser.image().value())))
             .andExpect(jsonPath("$.user.token", is("token")))
             .andDo(document("user-update",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 requestFields(
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("변경유저이름"),
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("변경이메일"),
-                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("변경패스워드"),
-                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("변경bio")
-                        .optional(),
-                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("변경이미지")
-                        .optional()
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username for update").optional(),
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email for update").optional(),
+                    fieldWithPath("user.password").type(JsonFieldType.STRING).description("user's password for update").optional(),
+                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio for update").optional(),
+                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("user's image for update").optional()
                 ),
                 responseFields(
-                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("이메일"),
-                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("로그인 토큰"),
-                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("유저이름"),
-                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("bio")
-                        .optional(),
-                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("이미지")
-                        .optional()
+                    fieldWithPath("user.email").type(JsonFieldType.STRING).description("user's email"),
+                    fieldWithPath("user.token").type(JsonFieldType.STRING).description("user's login token"),
+                    fieldWithPath("user.username").type(JsonFieldType.STRING).description("user's username"),
+                    fieldWithPath("user.bio").type(JsonFieldType.STRING).description("user's bio").optional(),
+                    fieldWithPath("user.image").type(JsonFieldType.STRING).description("user's image").optional()
                 )
             ))
         ;

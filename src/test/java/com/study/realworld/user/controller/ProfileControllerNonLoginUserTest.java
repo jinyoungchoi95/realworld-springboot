@@ -93,7 +93,7 @@ class ProfileControllerNonLoginUserTest {
             .andExpect(jsonPath("$.profile.bio", is(user.bio().value())))
             .andExpect(jsonPath("$.profile.image", is(nullValue())))
             .andExpect(jsonPath("$.profile.following", is(false)))
-            .andDo(document("get-profile-login",
+            .andDo(document("get-profile-nonlogin",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 pathParameters(

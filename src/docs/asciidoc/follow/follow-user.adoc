@@ -1,0 +1,24 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Follow User
+`POST /api/profiles/:username/follow`
+
+When you want to follow a user with {username},  you can follow user by requesting the API.
+
+==== Request
+===== Path Parameters
+include::{path}/follow-profile/path-parameters.adoc[]
+===== Request Header
+include::{path}/follow-profile/request-headers.adoc[]
+===== Example Http Request
+include::{path}/follow-profile/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/follow-profile/response-fields.adoc[]
+===== Example Http Response
+include::{path}/follow-profile/http-response.adoc[]

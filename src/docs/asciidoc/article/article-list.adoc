@@ -1,0 +1,47 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== List Articles
+`GET /api/articles`
+
+When you want to search articles, you can search by requesting the API.
+Provide `offset`, `limit`, `tag`, `author` or `favorited` query parameter to filter results.
+
+When logged in, the following information for the author and favorited article by user is updated.
+
+include::../common/authentication-optional.adoc[]
+
+==== List Articles (No Authentication)
+`GET /api/articles`
+
+==== Request
+===== Query Parameters
+include::{path}/articles-find-nonlogin/request-parameters.adoc[]
+===== Example Http Request
+include::{path}/articles-find-nonlogin/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/articles-find-nonlogin/response-fields.adoc[]
+===== Example Http Response
+include::{path}/articles-find-nonlogin/http-response.adoc[]
+
+==== List Articles (Authentication)
+`GET /api/articles`
+
+==== Request
+===== Query Parameters
+include::{path}/articles-find-login/request-parameters.adoc[]
+===== Request Header
+include::{path}/articles-find-login/request-headers.adoc[]
+===== Example Http Request
+include::{path}/articles-find-login/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/articles-find-login/response-fields.adoc[]
+===== Example Http Response
+include::{path}/articles-find-login/http-response.adoc[]
