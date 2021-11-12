@@ -1,10 +1,13 @@
 package com.study.realworld.follow.controller;
 
+import static com.study.realworld.testutil.DocumentFormatGenerator.getAuthorizationHeaderDescriptor;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentRequest;
 import static com.study.realworld.user.controller.ApiDocumentUtils.getDocumentResponse;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
@@ -32,7 +35,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -61,7 +63,7 @@ class FollowControllerTest {
         SecurityContextHolder.clearContext();
         mockMvc = MockMvcBuilders.standaloneSetup(followController)
             .apply(documentationConfiguration(restDocumentationContextProvider))
-            .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver(), new PrincipalArgumentResolver())
+            .setCustomArgumentResolvers(new PrincipalArgumentResolver())
             .alwaysExpect(status().isOk())
             .build();
 
@@ -94,6 +96,7 @@ class FollowControllerTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(post(URL, username)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -109,6 +112,7 @@ class FollowControllerTest {
             .andDo(document("follow-profile",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 pathParameters(
                     parameterWithName("username").description("want to search user's username")
                 ),
@@ -136,6 +140,7 @@ class FollowControllerTest {
 
         // when
         ResultActions resultActions = mockMvc.perform(delete(URL, username)
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -151,6 +156,7 @@ class FollowControllerTest {
             .andDo(document("unfollow-profile",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 pathParameters(
                     parameterWithName("username").description("want to search user's username")
                 ),

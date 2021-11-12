@@ -13,3 +13,7 @@ include::{docdir}/user/user-registration.adoc[]
 include::{docdir}/user/user-get-current.adoc[]
 include::{docdir}/user/user-update.adoc[]
 include::{docdir}/user/user-profile.adoc[]
+
+== Follow
+include::{docdir}/follow/follow-user.adoc[]
+include::{docdir}/follow/unfollow-user.adoc[]
