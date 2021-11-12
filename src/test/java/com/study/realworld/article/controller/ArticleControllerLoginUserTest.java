@@ -308,6 +308,7 @@ class ArticleControllerLoginUserTest {
         ResultActions resultActions = mockMvc.perform(get(URL)
             .param("offset", String.valueOf(offset))
             .param("limit", String.valueOf(limit))
+            .header(AUTHORIZATION, "Token jwt.token.here")
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print());
 
@@ -343,11 +344,9 @@ class ArticleControllerLoginUserTest {
                 getDocumentResponse(),
                 requestParameters(
                     parameterWithName("offset").description("offset/page number of articles[default=20]").optional(),
-                    parameterWithName("limit").description("limit number of articles[default=0]").optional(),
-                    parameterWithName("tag").description("filter by tag").optional(),
-                    parameterWithName("author").description("filter by author username").optional(),
-                    parameterWithName("favorited").description("filter by favorited user").optional()
+                    parameterWithName("limit").description("limit number of articles[default=0]").optional()
                 ),
+                requestHeaders(getAuthorizationHeaderDescriptor()),
                 responseFields(
                     fieldWithPath("articles").type(JsonFieldType.ARRAY).description("articles list"),
 
