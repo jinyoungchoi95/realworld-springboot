@@ -1,0 +1,20 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Delte Article
+`DELETE /api/articles/:slug`
+
+When you want to delete your article with {slug}, you can delete it requesting the API.
+
+==== Request
+===== Request Header
+include::{path}/article-delete/request-headers.adoc[]
+===== Example Request Body
+include::{path}/article-delete/http-request.adoc[]
+
+==== Response
+===== Response Field
+include::{path}/article-delete/http-response.adoc[]
