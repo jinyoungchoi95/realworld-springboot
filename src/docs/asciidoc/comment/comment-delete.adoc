@@ -1,0 +1,22 @@
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:sectlinks:
+:path: ../../../../build/generated-snippets
+
+=== Delete Comment
+`DELETE /api/articles/:slug/comments/:id`
+
+When you want to delete your comment with {id} in the article with {slug}, you can delete it requesting the API.
+
+==== Request
+===== Path Parameters
+include::{path}/comment-delete/path-parameters.adoc[]
+===== Request Header
+include::{path}/comment-delete/request-headers.adoc[]
+===== Example Request Body
+include::{path}/comment-delete/http-request.adoc[]
+
+==== Response
+===== Example Response Body
+include::{path}/comment-delete/http-response.adoc[]

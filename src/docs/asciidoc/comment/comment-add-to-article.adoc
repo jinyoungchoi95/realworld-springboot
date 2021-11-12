@@ -12,6 +12,8 @@ When you want to create a comment to article with {slug}, you can request it thr
 API Request body must be requested with `body`.
 
 ==== Request
+===== Path Parameters
+include::{path}/comment-create/path-parameters.adoc[]
 ===== Request Header
 include::{path}/comment-create/request-headers.adoc[]
 ===== Request Field
