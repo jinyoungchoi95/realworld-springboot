@@ -14,11 +14,11 @@ API Request body must be requested with `username`, `email` and `password`.
 ==== Request
 ===== Request Field
 include::{path}/user-registration/request-fields.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/user-registration/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/user-registration/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/user-registration/http-response.adoc[]

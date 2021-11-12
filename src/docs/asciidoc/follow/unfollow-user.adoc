@@ -14,11 +14,11 @@ When you want to unfollow a user with {username},  you can unfollow user by requ
 include::{path}/unfollow-profile/path-parameters.adoc[]
 ===== Request Header
 include::{path}/unfollow-profile/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/unfollow-profile/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/unfollow-profile/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/unfollow-profile/http-response.adoc[]

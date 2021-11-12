@@ -15,11 +15,11 @@ Provide `offset`, `limit` query parameter to filter results.
 include::{path}/articles-feed/request-parameters.adoc[]
 ===== Request Header
 include::{path}/articles-feed/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/articles-feed/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/articles-feed/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/articles-feed/http-response.adoc[]

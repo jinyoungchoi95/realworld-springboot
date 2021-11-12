@@ -14,9 +14,9 @@ When you want to delete your comment with {id} in the article with {slug}, you c
 include::{path}/comment-delete/path-parameters.adoc[]
 ===== Request Header
 include::{path}/comment-delete/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/comment-delete/http-request.adoc[]
 
 ==== Response
-===== Example Response Body
+===== Example Http Response
 include::{path}/comment-delete/http-response.adoc[]

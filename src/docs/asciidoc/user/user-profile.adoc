@@ -19,13 +19,13 @@ include::../common/authentication-optional.adoc[]
 ==== Request
 ===== Path Parameters
 include::{path}/get-profile-nonlogin/path-parameters.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/get-profile-nonlogin/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/get-profile-nonlogin/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/get-profile-nonlogin/http-response.adoc[]
 
 ==== Get Profile (Authentication)
@@ -36,11 +36,11 @@ include::{path}/get-profile-nonlogin/http-response.adoc[]
 include::{path}/get-profile-login/path-parameters.adoc[]
 ===== Request Header
 include::{path}/get-profile-login/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/get-profile-login/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/get-profile-login/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/get-profile-login/http-response.adoc[]

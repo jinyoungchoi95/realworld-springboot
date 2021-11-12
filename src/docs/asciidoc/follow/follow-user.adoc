@@ -14,11 +14,11 @@ When you want to follow a user with {username},  you can follow user by requesti
 include::{path}/follow-profile/path-parameters.adoc[]
 ===== Request Header
 include::{path}/follow-profile/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/follow-profile/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/follow-profile/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/follow-profile/http-response.adoc[]

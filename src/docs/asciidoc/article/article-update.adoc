@@ -18,11 +18,11 @@ include::{path}/article-delete/path-parameters.adoc[]
 include::{path}/article-update/request-headers.adoc[]
 ===== Request Field
 include::{path}/article-update/request-fields.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/article-update/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/article-update/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/article-update/http-response.adoc[]

@@ -12,11 +12,11 @@ When you want to get current user info, you can request it through the API with 
 ==== Request
 ===== Request Header
 include::{path}/user-get-current/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/user-get-current/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/user-get-current/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/user-get-current/http-response.adoc[]

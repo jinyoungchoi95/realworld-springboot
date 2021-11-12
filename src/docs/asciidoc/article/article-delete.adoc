@@ -14,9 +14,9 @@ When you want to delete your article with {slug}, you can delete it requesting t
 include::{path}/article-delete/path-parameters.adoc[]
 ===== Request Header
 include::{path}/article-delete/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/article-delete/http-request.adoc[]
 
 ==== Response
-===== Response Field
+===== Example Http Response
 include::{path}/article-delete/http-response.adoc[]

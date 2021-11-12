@@ -18,11 +18,11 @@ include::{path}/comment-create/path-parameters.adoc[]
 include::{path}/comment-create/request-headers.adoc[]
 ===== Request Field
 include::{path}/comment-create/request-fields.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/comment-create/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/comment-create/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/comment-create/http-response.adoc[]

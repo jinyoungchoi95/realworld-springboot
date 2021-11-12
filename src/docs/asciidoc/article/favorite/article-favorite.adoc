@@ -14,11 +14,11 @@ When you want to favorite an article with {slug}, you can request it through the
 include::{path}/article-favorite/path-parameters.adoc[]
 ===== Request Header
 include::{path}/article-favorite/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/article-favorite/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/article-favorite/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/article-favorite/http-response.adoc[]

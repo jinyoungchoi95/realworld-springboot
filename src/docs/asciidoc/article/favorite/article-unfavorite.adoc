@@ -14,11 +14,11 @@ When you want to unfavorite an article with {slug}, you can request it through t
 include::{path}/article-unfavorite/path-parameters.adoc[]
 ===== Request Header
 include::{path}/article-unfavorite/request-headers.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/article-unfavorite/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/article-unfavorite/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/article-unfavorite/http-response.adoc[]

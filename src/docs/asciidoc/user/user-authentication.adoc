@@ -14,11 +14,11 @@ API Request body must be requested with `email` and `password`.
 ==== Request
 ===== Request Field
 include::{path}/user-authentication/request-fields.adoc[]
-===== Request Example
+===== Example Http Request
 include::{path}/user-authentication/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/user-authentication/response-fields.adoc[]
-===== Response Example
+===== Example Http Response
 include::{path}/user-authentication/http-response.adoc[]

@@ -10,11 +10,11 @@
 When you want to search tags list, you can search by requesting the API.
 
 ==== Request
-===== Example Request Body
+===== Example Http Request
 include::{path}/tags-get/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/tags-get/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/tags-get/http-response.adoc[]

@@ -14,11 +14,11 @@ When you want to update your information, you can update it by requesting the AP
 include::{path}/user-update/request-headers.adoc[]
 ===== Request Field
 include::{path}/user-update/request-fields.adoc[]
-===== Example Request Body
+===== Example Http Request
 include::{path}/user-update/http-request.adoc[]
 
 ==== Response
 ===== Response Field
 include::{path}/user-update/response-fields.adoc[]
-===== Example Response Body
+===== Example Http Response
 include::{path}/user-update/http-response.adoc[]
